@@ -1,83 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/wine"
     tools:context=".MainActivity">
-
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="204dp"
-        android:layout_height="216dp"
-        android:src="@drawable/cherrylips"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="265dp"
+        android:layout_height="330dp"
+        android:layout_marginTop="160dp"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bold"
-        android:text="c h é r i e"
-        android:textColor="@color/wine"
-        android:textSize="100px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/light"
-        android:text="discovering souls behind the smiles"
-        android:textColor="@color/black"
-        android:textSize="40px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:text="Discovering souls behind the smiles"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.537" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/loginButton"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="116dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/bold"
+        android:onClick="loginPage"
+        android:text="Login"
+        android:textColor="@color/wine"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagline" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/wine"
         android:fontFamily="@font/bold"
-        android:text="  Login  "
-        android:onClick="loginPage"
-        android:id="@+id/loginButton"
-        android:textColor="@color/white"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.692" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink"
-        android:fontFamily="@font/bold"
-        android:text="Register"
-        android:textColor="@color/red"
-        android:textSize="50px"
-        android:id="@+id/registerButton"
         android:onClick="registerPage"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.789" />
+        app:layout_constraintTop_toBottomOf="@id/loginButton"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
