@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -10,152 +11,133 @@
 
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:drawableStart="@drawable/back"
-        android:layout_height="200px"
+        android:layout_height="70dp"
         android:background="@color/wine"
         android:fontFamily="@font/bold"
         android:gravity="center"
-        android:text="c h é r i e   "
+        android:text="c h é r i e"
         android:textColor="@color/white"
-        android:textSize="80px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-<!--NOTE: I dont think the back button will work hehe for visualization purposes only-->
-<!--The back button is there for navigation purposes only, the back button should be the arrow above-->
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/bold"
         android:text="Reignite sparks!"
         android:textColor="@color/black"
-        android:textSize="90px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.238" />
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
 
     <TextView
+        android:id="@+id/subtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/light"
-        android:text="login with your credentials"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/regular"
+        android:text="Login with your credentials"
         android:textColor="@color/black"
-        android:textSize="40px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308" />
+        app:layout_constraintTop_toBottomOf="@id/tagline" />
 
-    <EditText
-        android:layout_width="230dp"
-        android:layout_height="56dp"
-        android:drawableStart="@drawable/round_person_24"
-        android:fontFamily="@font/regular"
-        android:hint=" username"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
+    <!--group input boxes-->
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="230dp"
-        android:layout_height="56dp"
-        android:drawableStart="@drawable/round_key_24"
-        android:fontFamily="@font/regular"
-        android:hint=" password"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/input_group"
+        android:layout_width="355dp"
+        android:layout_height="145dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintTop_toBottomOf="@id/subtext">
+
+        <!-- username input field -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameField"
+                android:layout_width="350dp"
+                android:layout_height="56dp"
+                android:drawableStart="@drawable/round_person_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/regular"
+                android:hint="Username"
+                android:padding="12dp"
+                android:textColorHint="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- password input field-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordField"
+                android:layout_width="350dp"
+                android:layout_height="56dp"
+                android:drawableStart="@drawable/round_key_24"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/regular"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColorHint="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="324dp"
+        android:layout_height="59dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="84dp"
         android:backgroundTint="@color/wine"
         android:fontFamily="@font/bold"
-        android:onClick="login"
-        android:text="  Login  "
+        android:onClick="feed"
+        android:text="Login"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="470dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.692" />
-
-    <!--     for functionality purposes only, back button will be better :)-->
+        app:layout_constraintTop_toBottomOf="@+id/input_group" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/pink"
+        android:id="@+id/backButton"
+        android:layout_width="324dp"
+        android:layout_height="59dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/white"
         android:fontFamily="@font/bold"
         android:onClick="home"
         android:text="Back"
-        android:textColor="@color/red"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/wine"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:src="@drawable/facebook"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.323"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.868" />
-
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="60dp"
-        android:src="@drawable/gmail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.64"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.867" />
-
-    <TextView
-        android:id="@+id/orhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bold"
-        android:text="OR"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
-
+        app:layout_constraintTop_toBottomOf="@id/loginButton"
+        app:strokeColor="@color/wine"
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
