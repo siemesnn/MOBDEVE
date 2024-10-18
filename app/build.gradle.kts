@@ -25,12 +25,18 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        buildFeatures {
+            viewBinding = true
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
+
 
 dependencies {
 
@@ -42,8 +48,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.circleimageview)
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+
 //    implementation(platform(libs.firebase.bom))
 //    implementation(libs.firebase.analytics)
     implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.material.v190)
 }

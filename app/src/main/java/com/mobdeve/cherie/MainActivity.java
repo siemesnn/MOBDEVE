@@ -1,6 +1,8 @@
 package com.mobdeve.cherie;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
@@ -14,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        EditText username;
-        EditText password;
+
+
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -25,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
 
     }
+        public void loginPage(View v){
+            Intent i = new Intent(MainActivity.this, login.class);
+            startActivity(i);
+        }
 
+        public void registerPage(View v){
+            Intent i = new Intent(MainActivity.this, register.class);
+            startActivity(i);
+        }
 
 }
