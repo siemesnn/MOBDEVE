@@ -1,0 +1,17 @@
+
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item>
+            <!-- Background color with some opacity -->
+            <shape android:shape="rectangle">
+                <solid android:color="#80FFFFFF"/> <!-- White color with 50% opacity -->
+                <corners android:radius="16dp"/> <!-- Optional: rounded corners -->
+            </shape>
+        </item>
+        <item>
+            <!-- Adding a blur effect -->
+            <shape android:shape="rectangle">
+                <solid android:color="#00FFFFFF"/> <!-- Transparent color -->
+                <corners android:radius="16dp"/>
+            </shape>
+        </item>
+    </layer-list>
