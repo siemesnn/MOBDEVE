@@ -24,6 +24,8 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
     private final AbstractExternalDependencyFactory owner = this;
     private final EspressoLibraryAccessors laccForEspressoLibraryAccessors = new EspressoLibraryAccessors(owner);
     private final ExtLibraryAccessors laccForExtLibraryAccessors = new ExtLibraryAccessors(owner);
+    private final FirebaseLibraryAccessors laccForFirebaseLibraryAccessors = new FirebaseLibraryAccessors(owner);
+    private final MaterialLibraryAccessors laccForMaterialLibraryAccessors = new MaterialLibraryAccessors(owner);
     private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
     private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
     private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
@@ -62,6 +64,20 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
     }
 
     /**
+     * Dependency provider for <b>circleimageview</b> with <b>de.hdodenhof:circleimageview</b> coordinates and
+     * with version reference <b>circleimageview</b>
+     * <p>
+     * This dependency was declared in catalog libs.versions.toml
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public Provider<MinimalExternalModuleDependency> getCircleimageview() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return create("circleimageview");
+    }
+
+    /**
      * Dependency provider for <b>constraintlayout</b> with <b>androidx.constraintlayout:constraintlayout</b> coordinates and
      * with version reference <b>constraintlayout</b>
      * <p>
@@ -90,20 +106,6 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
     }
 
     /**
-     * Dependency provider for <b>material</b> with <b>com.google.android.material:material</b> coordinates and
-     * with version reference <b>material</b>
-     * <p>
-     * This dependency was declared in catalog libs.versions.toml
-     *
-     * @deprecated Will be removed in Gradle 9.0.
-     */
-    @Deprecated
-    public Provider<MinimalExternalModuleDependency> getMaterial() {
-        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
-        return create("material");
-    }
-
-    /**
      * Group of libraries at <b>espresso</b>
      *
      * @deprecated Will be removed in Gradle 9.0.
@@ -123,6 +125,28 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
     public ExtLibraryAccessors getExt() {
         org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
         return laccForExtLibraryAccessors;
+    }
+
+    /**
+     * Group of libraries at <b>firebase</b>
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public FirebaseLibraryAccessors getFirebase() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return laccForFirebaseLibraryAccessors;
+    }
+
+    /**
+     * Group of libraries at <b>material</b>
+     *
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public MaterialLibraryAccessors getMaterial() {
+        org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+        return laccForMaterialLibraryAccessors;
     }
 
     /**
@@ -198,6 +222,96 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
 
     }
 
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class FirebaseLibraryAccessors extends SubDependencyFactory {
+
+        public FirebaseLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>analytics</b> with <b>com.google.firebase:firebase-analytics</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getAnalytics() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("firebase.analytics");
+        }
+
+        /**
+         * Dependency provider for <b>auth</b> with <b>com.google.firebase:firebase-auth</b> coordinates and
+         * with version reference <b>firebaseAuth</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getAuth() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("firebase.auth");
+        }
+
+        /**
+         * Dependency provider for <b>bom</b> with <b>com.google.firebase:firebase-bom</b> coordinates and
+         * with version reference <b>firebaseBom</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getBom() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("firebase.bom");
+        }
+
+    }
+
+    /**
+     * @deprecated Will be removed in Gradle 9.0.
+     */
+    @Deprecated
+    public static class MaterialLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+
+        public MaterialLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>material</b> with <b>com.google.android.material:material</b> coordinates and
+         * with version reference <b>material</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("material");
+        }
+
+        /**
+         * Dependency provider for <b>v190</b> with <b>com.google.android.material:material</b> coordinates and
+         * with version reference <b>materialVersion</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         *
+         * @deprecated Will be removed in Gradle 9.0.
+         */
+        @Deprecated
+        public Provider<MinimalExternalModuleDependency> getV190() {
+            org.gradle.internal.deprecation.DeprecationLogger.deprecateBehaviour("Accessing libraries or bundles from version catalogs in the plugins block.").withAdvice("Only use versions or plugins from catalogs in the plugins block.").willBeRemovedInGradle9().withUpgradeGuideSection(8, "kotlin_dsl_deprecated_catalogs_plugins_block").nagUser();
+            return create("material.v190");
+        }
+
+    }
+
     public static class VersionAccessors extends VersionFactory  {
 
         public VersionAccessors(ProviderFactory providers, DefaultVersionCatalog config) { super(providers, config); }
@@ -233,6 +347,16 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
         public Provider<String> getAppcompat() { return getVersion("appcompat"); }
 
         /**
+         * Version alias <b>circleimageview</b> with value <b>3.1.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getCircleimageview() { return getVersion("circleimageview"); }
+
+        /**
          * Version alias <b>constraintlayout</b> with value <b>2.1.4</b>
          * <p>
          * If the version is a rich version and cannot be represented as a
@@ -251,6 +375,26 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
          * This version was declared in catalog libs.versions.toml
          */
         public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
+
+        /**
+         * Version alias <b>firebaseAuth</b> with value <b>23.0.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getFirebaseAuth() { return getVersion("firebaseAuth"); }
+
+        /**
+         * Version alias <b>firebaseBom</b> with value <b>33.3.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getFirebaseBom() { return getVersion("firebaseBom"); }
 
         /**
          * Version alias <b>junit</b> with value <b>4.13.2</b>
@@ -281,6 +425,16 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
          * This version was declared in catalog libs.versions.toml
          */
         public Provider<String> getMaterial() { return getVersion("material"); }
+
+        /**
+         * Version alias <b>materialVersion</b> with value <b>1.9.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getMaterialVersion() { return getVersion("materialVersion"); }
 
     }
 

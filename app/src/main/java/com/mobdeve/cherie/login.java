@@ -29,7 +29,7 @@ public class login extends AppCompatActivity {
     }
 
     public void login(View v){
-        Intent i = new Intent(login.this, feed.class);
+        Intent i = new Intent(login.this, dashboard.class);
         startActivity(i);
     }
 

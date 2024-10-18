@@ -27,10 +27,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-//        public void applyNow(View v){
-//            Intent i = new Intent(MainActivity.this, input.class);
-//            startActivity(i);
-//        }
+
     }
         public void loginPage(View v){
             Intent i = new Intent(MainActivity.this, login.class);

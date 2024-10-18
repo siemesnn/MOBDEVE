@@ -24,6 +24,8 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
     private final AbstractExternalDependencyFactory owner = this;
     private final EspressoLibraryAccessors laccForEspressoLibraryAccessors = new EspressoLibraryAccessors(owner);
     private final ExtLibraryAccessors laccForExtLibraryAccessors = new ExtLibraryAccessors(owner);
+    private final FirebaseLibraryAccessors laccForFirebaseLibraryAccessors = new FirebaseLibraryAccessors(owner);
+    private final MaterialLibraryAccessors laccForMaterialLibraryAccessors = new MaterialLibraryAccessors(owner);
     private final VersionAccessors vaccForVersionAccessors = new VersionAccessors(providers, config);
     private final BundleAccessors baccForBundleAccessors = new BundleAccessors(objects, providers, config, attributesFactory, capabilityNotationParser);
     private final PluginAccessors paccForPluginAccessors = new PluginAccessors(providers, config);
@@ -74,16 +76,6 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
     }
 
     /**
-     * Dependency provider for <b>material</b> with <b>com.google.android.material:material</b> coordinates and
-     * with version reference <b>material</b>
-     * <p>
-     * This dependency was declared in catalog libs.versions.toml
-     */
-    public Provider<MinimalExternalModuleDependency> getMaterial() {
-        return create("material");
-    }
-
-    /**
      * Group of libraries at <b>espresso</b>
      */
     public EspressoLibraryAccessors getEspresso() {
@@ -95,6 +87,20 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
      */
     public ExtLibraryAccessors getExt() {
         return laccForExtLibraryAccessors;
+    }
+
+    /**
+     * Group of libraries at <b>firebase</b>
+     */
+    public FirebaseLibraryAccessors getFirebase() {
+        return laccForFirebaseLibraryAccessors;
+    }
+
+    /**
+     * Group of libraries at <b>material</b>
+     */
+    public MaterialLibraryAccessors getMaterial() {
+        return laccForMaterialLibraryAccessors;
     }
 
     /**
@@ -146,6 +152,68 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
          */
         public Provider<MinimalExternalModuleDependency> getJunit() {
             return create("ext.junit");
+        }
+
+    }
+
+    public static class FirebaseLibraryAccessors extends SubDependencyFactory {
+
+        public FirebaseLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>analytics</b> with <b>com.google.firebase:firebase-analytics</b> coordinates and
+         * with <b>no version specified</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getAnalytics() {
+            return create("firebase.analytics");
+        }
+
+        /**
+         * Dependency provider for <b>auth</b> with <b>com.google.firebase:firebase-auth</b> coordinates and
+         * with version reference <b>firebaseAuth</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getAuth() {
+            return create("firebase.auth");
+        }
+
+        /**
+         * Dependency provider for <b>bom</b> with <b>com.google.firebase:firebase-bom</b> coordinates and
+         * with version reference <b>firebaseBom</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getBom() {
+            return create("firebase.bom");
+        }
+
+    }
+
+    public static class MaterialLibraryAccessors extends SubDependencyFactory implements DependencyNotationSupplier {
+
+        public MaterialLibraryAccessors(AbstractExternalDependencyFactory owner) { super(owner); }
+
+        /**
+         * Dependency provider for <b>material</b> with <b>com.google.android.material:material</b> coordinates and
+         * with version reference <b>material</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> asProvider() {
+            return create("material");
+        }
+
+        /**
+         * Dependency provider for <b>v190</b> with <b>com.google.android.material:material</b> coordinates and
+         * with version reference <b>materialVersion</b>
+         * <p>
+         * This dependency was declared in catalog libs.versions.toml
+         */
+        public Provider<MinimalExternalModuleDependency> getV190() {
+            return create("material.v190");
         }
 
     }
@@ -205,6 +273,26 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
         public Provider<String> getEspressoCore() { return getVersion("espressoCore"); }
 
         /**
+         * Version alias <b>firebaseAuth</b> with value <b>23.0.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getFirebaseAuth() { return getVersion("firebaseAuth"); }
+
+        /**
+         * Version alias <b>firebaseBom</b> with value <b>33.3.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getFirebaseBom() { return getVersion("firebaseBom"); }
+
+        /**
          * Version alias <b>junit</b> with value <b>4.13.2</b>
          * <p>
          * If the version is a rich version and cannot be represented as a
@@ -233,6 +321,16 @@ public class LibrariesForLibs extends AbstractExternalDependencyFactory {
          * This version was declared in catalog libs.versions.toml
          */
         public Provider<String> getMaterial() { return getVersion("material"); }
+
+        /**
+         * Version alias <b>materialVersion</b> with value <b>1.9.0</b>
+         * <p>
+         * If the version is a rich version and cannot be represented as a
+         * single version string, an empty string is returned.
+         * <p>
+         * This version was declared in catalog libs.versions.toml
+         */
+        public Provider<String> getMaterialVersion() { return getVersion("materialVersion"); }
 
     }
 

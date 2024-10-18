@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard">
+
+<!--    testing this out-->
+<!--adding a comment for testing-->
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/frame_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="@color/wine"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:text="c h é r i e"
+        android:textColor="@color/white"
+        android:textSize="80px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- CardView -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="340dp"
+        android:layout_height="350dp"
+        android:paddingBottom="50dp"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@color/wine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36"
+        app:layout_constraintHorizontal_bias="0.5">
+
+        <!-- LinearLayout Inside CardView for arranging TextViews -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- First TextView -->
+            <TextView
+                android:id="@+id/name_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="150px"
+                android:fontFamily="@font/bold"
+                android:gravity="center_horizontal"
+                android:text="Jeongwoo, 22"
+                android:textColor="@color/white"
+                android:textSize="90px" />
+
+            <!-- Third TextView -->
+            <TextView
+                android:id="@+id/bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-80px"
+                android:fontFamily="@font/regular"
+                android:gravity="center"
+                android:paddingBottom="40px"
+                android:text="i sing on my free time and i'm a fan of treasure and i'm rich"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/hobbies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/light"
+                android:gravity="center"
+                android:paddingBottom="40px"
+                android:text="i'm into [hobbies]"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Fourth TextView -->
+            <TextView
+                android:id="@+id/preferences_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:fontFamily="@font/light"
+                android:gravity="center"
+                android:text="dating in Manila"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/bold"
+        android:text="  No No  "
+        android:textColor="@color/white"
+        android:textSize="50px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/wine"
+        android:fontFamily="@font/bold"
+        android:text="  Oui Oiu  "
+        android:textColor="@color/white"
+        android:textSize="50px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/custom_navbar"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="@color/wine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- LinearLayout for evenly spaced ImageButtons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- Home Button -->
+            <ImageButton
+                android:id="@+id/home_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home"
+                android:onClick="dashboardNav"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Home" />
+
+            <!-- Chat Button -->
+            <ImageButton
+                android:id="@+id/chat_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat"
+                android:onClick="chatNav"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Chat" />
+
+            <!-- Settings Button -->
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/matches"
+                android:onClick="matchesNav"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Settings" />
+
+            <!-- Profile Button -->
+            <ImageButton
+                android:id="@+id/profile_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/settings"
+                android:onClick="settingsNav"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Profile" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
