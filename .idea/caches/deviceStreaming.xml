@@ -26,6 +26,7 @@
           <option name="screenY" value="2160" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+
           <option name="api" value="34" />
           <option name="brand" value="Lenovo" />
           <option name="codename" value="TB370FU" />
@@ -37,6 +38,7 @@
           <option name="screenY" value="2944" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+
           <option name="api" value="31" />
           <option name="brand" value="samsung" />
           <option name="codename" value="a51" />
@@ -257,6 +259,7 @@
           <option name="screenY" value="2176" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+
           <option name="api" value="34" />
           <option name="brand" value="samsung" />
           <option name="codename" value="q6q" />
@@ -268,6 +271,7 @@
           <option name="screenY" value="2160" />
         </PersistentDeviceSelectionData>
         <PersistentDeviceSelectionData>
+
           <option name="api" value="30" />
           <option name="brand" value="google" />
           <option name="codename" value="r11" />
