@@ -5,6 +5,72 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".feed">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/wine"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:text="c h é r i e"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- initial nav bar design-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/wine"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- profile button -->
+            <ImageButton
+                android:id="@+id/profileButton"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@color/wine"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="Profile"
+                app:srcCompat="@drawable/profile_button" />
+
+            <!-- feed button -->
+            <ImageButton
+                android:id="@+id/feedButton"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@color/wine"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="Feed"
+                app:srcCompat="@drawable/feed_icon_button" />
+
+            <!-- inbox button -->
+            <ImageButton
+                android:id="@+id/inboxButton"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@color/wine"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="0dp"
+                android:contentDescription="Inbox"
+                app:srcCompat="@drawable/inbox_icon_button" />
+
+        </LinearLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

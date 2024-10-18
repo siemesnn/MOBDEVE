@@ -44,7 +44,7 @@ public class chat extends AppCompatActivity {
     }
 
     public void settingsNav(View v){
-        Intent i = new Intent(this, settings.class);
+        Intent i = new Intent(this, profile.class);
         startActivity(i);
     }
 
