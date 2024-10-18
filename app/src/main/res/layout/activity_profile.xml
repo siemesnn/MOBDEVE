@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".profile">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <ImageView
         android:id="@+id/profilePic"
@@ -116,22 +114,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/regular"
         android:text="Hobbies"
-        android:id= "@+id/hobbyLabel"
+        android:id="@+id/hobbyLabel"
         android:textColor="@color/wine"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileBio" />
-
-<!--    put buttons below ? :DD -->
 
     <TextView
         android:layout_width="wrap_content"
@@ -147,6 +142,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hobbyLabel" />
 
+    <!-- Spinner for preferences -->
+    <Spinner
+        android:id="@+id/preferencesSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby" />
+
     <Button
         android:id="@+id/editBtn"
         android:layout_width="wrap_content"
@@ -160,8 +165,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/preferencesSpinner" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -176,15 +181,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/preferencesSpinner"
+        app:layout_constraintVertical_bias="0.0" />
 
-        />
-
-    
-    
-<!--    NAVBAR BELOW-->
-
+    <!-- NAVBAR BELOW -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/custom_navbar"
         android:layout_width="match_parent"

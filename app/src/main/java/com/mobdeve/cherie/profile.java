@@ -3,10 +3,14 @@ package com.mobdeve.cherie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,63 +20,68 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class profile extends AppCompatActivity {
 
+    private Spinner preferencesSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        Button saveBtn;
-        Button editBtn;
-
-        ImageButton home;
-        ImageButton chat;
-        ImageButton settings;
-
-
-
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_profile);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        home = findViewById(R.id.home_button);
-        chat = findViewById(R.id.chat_button);
-        settings = findViewById(R.id.settings_button);
+        // Initialize buttons
+        ImageButton home = findViewById(R.id.home_button);
+        ImageButton chat = findViewById(R.id.chat_button);
+        ImageButton settings = findViewById(R.id.settings_button);
+        Button editBtn = findViewById(R.id.editBtn);
+        Button saveBtn = findViewById(R.id.saveBtn);
 
-        editBtn=findViewById(R.id.editBtn);
-        saveBtn=findViewById(R.id.saveBtn);
+        // Initialize spinner
+        preferencesSpinner = findViewById(R.id.preferencesSpinner);
+
+        // Set up spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.preferences_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        preferencesSpinner.setAdapter(adapter);
+
+        preferencesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedPreference = parent.getItemAtPosition(position).toString();
+                // Handle the selected preference
+                Toast.makeText(parent.getContext(), "Selected: " + selectedPreference, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle case where nothing is selected if needed
+            }
+        });
     }
 
     public void editProfile(View v){
-        EditText profileName;
-        EditText profileBio;
-        Button editBtn;
-        Button saveBtn;
-        profileName=findViewById(R.id.profileName);
-        profileBio=findViewById(R.id.profileBio);
-        editBtn=findViewById(R.id.editBtn);
-        saveBtn=findViewById(R.id.saveBtn);
-
+        EditText profileName = findViewById(R.id.profileName);
+        EditText profileBio = findViewById(R.id.profileBio);
+        Button editBtn = findViewById(R.id.editBtn);
+        Button saveBtn = findViewById(R.id.saveBtn);
 
         profileName.setFocusableInTouchMode(true);
         profileBio.setFocusableInTouchMode(true);
         editBtn.setVisibility(View.GONE);
         saveBtn.setVisibility(View.VISIBLE);
-
     }
 
     public void saveProfile(View v){
-        EditText profileName;
-        EditText profileBio;
-        Button editBtn;
-        Button saveBtn;
-        profileName=findViewById(R.id.profileName);
-        profileBio=findViewById(R.id.profileBio);
-        editBtn=findViewById(R.id.editBtn);
-        saveBtn=findViewById(R.id.saveBtn);
+        EditText profileName = findViewById(R.id.profileName);
+        EditText profileBio = findViewById(R.id.profileBio);
+        Button editBtn = findViewById(R.id.editBtn);
+        Button saveBtn = findViewById(R.id.saveBtn);
 
         profileName.setFocusableInTouchMode(false);
         profileBio.setFocusableInTouchMode(false);
