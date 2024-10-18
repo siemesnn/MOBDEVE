@@ -33,8 +33,5 @@ public class login extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void feed(View v){
-        Intent i = new Intent(login.this, feed.class);
-        startActivity(i);
-    }
+
 }
