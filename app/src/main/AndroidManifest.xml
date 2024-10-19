@@ -24,6 +24,12 @@
         android:theme="@style/Theme.Cherie"
         tools:targetApi="31">
         <activity
+            android:name=".matched_with_user"
+            android:exported="false" />
+        <activity
+            android:name=".hobbies"
+            android:exported="false" />
+        <activity
             android:name=".conversations"
             android:exported="false" />
         <activity

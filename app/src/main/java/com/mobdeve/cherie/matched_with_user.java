@@ -36,4 +36,9 @@ public class matched_with_user extends AppCompatActivity {
         Intent i = new Intent(matched_with_user.this, dashboard.class);
         startActivity(i);
     }
+
+    public void go2chat(View v){
+        Intent i = new Intent(matched_with_user.this, conversations.class);
+        startActivity(i);
+    }
 }

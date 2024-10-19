@@ -71,6 +71,7 @@
         android:backgroundTint="@color/white"
         android:fontFamily="@font/bold"
         android:text="Go to chat"
+        android:onClick="go2chat"
         android:textColor="@color/wine"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
