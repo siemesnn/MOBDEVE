@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ public class dashboard extends AppCompatActivity {
     ImageButton home;
     ImageButton chat;
     ImageButton settings;
+    Button yesBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,13 @@ public class dashboard extends AppCompatActivity {
         home = findViewById(R.id.home_button);
         chat = findViewById(R.id.chat_button);
         settings = findViewById(R.id.settings_button);
+        yesBTN = findViewById(R.id.yesButton);
 
+    }
+
+    public void matched(View v) {
+        Intent intent = new Intent(dashboard.this, matched_with_user.class);
+        startActivity(intent);
     }
 
     public void dashboardNav(View v){

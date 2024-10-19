@@ -29,6 +29,7 @@
         android:layout_width="262dp"
         android:layout_height="162dp"
         android:src="@drawable/profilepic"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -36,12 +37,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.202" />
 
+    <ImageButton
+        android:id="@+id/edit_pfp"
+        android:layout_width="38dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/profilePic"
+        app:layout_constraintEnd_toEndOf="@id/profilePic"
+        app:srcCompat="@drawable/edit_pfp_button" />
+
     <TextView
+        android:id="@+id/profileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/bold"
         android:text="Profile"
-        android:id="@+id/profileTitle"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,140 +63,186 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
+        android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/regular"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/bold"
         android:text="Nickname"
         android:textColor="@color/wine"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
     <EditText
         android:id="@+id/profileName"
-        android:layout_width="216dp"
-        android:layout_height="50dp"
+        android:layout_width="327dp"
+        android:layout_height="30dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/edit_text_rounded"
         android:fontFamily="@font/regular"
         android:hint="Enter your name"
         android:inputType="textPersonName"
-        android:padding="12dp"
         android:singleLine="true"
-        android:text="Beatrice"
+        android:text="Nana"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
     <TextView
+        android:id="@+id/bioLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/regular"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/bold"
         android:text="Bio"
         android:textColor="@color/wine"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <EditText
         android:id="@+id/profileBio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="326dp"
+        android:layout_height="35dp"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/edit_text_rounded"
         android:fontFamily="@font/regular"
         android:gravity="top|start"
-        android:hint="I am a frontend god,\nI will make your apps pretty!"
+        android:hint="looking for my soulmate\nI LOVE TREASURE!"
         android:inputType="textMultiLine"
-        android:padding="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileName" />
+        app:layout_constraintTop_toBottomOf="@+id/bioLabel" />
 
+    <!--buttons for hobbies-->
     <TextView
+        android:id="@+id/hobbyLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/regular"
-        android:text="Hobbies"
-        android:id="@+id/hobbyLabel"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/bold"
+        android:text="Hobbies and Interests"
         android:textColor="@color/wine"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileBio" />
 
+    <!--group hobbies-->
+    <LinearLayout
+        android:id="@+id/hobbyBox"
+        android:layout_width="328dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyLabel">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby1"
+            android:layout_width="100dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Dancing"
+            app:chipIcon="@drawable/dance_icon_hobby"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby2"
+            android:layout_width="85dp"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Dogs"
+            app:chipIcon="@drawable/dog_icon_hobby"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/addHobby"
+            android:layout_width="95dp"
+            android:layout_height="39dp"
+            android:backgroundTint="@color/wine"
+            android:text="Add More"
+            android:onClick="hobbies"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </LinearLayout>
+
     <TextView
+        android:id="@+id/preferencesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/placeholder_hobby"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/regular"
-        android:text="Placeholder Hobby"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/bold"
+        android:text="Preference"
+        android:textColor="@color/wine"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hobbyLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox"/>
 
     <!-- Spinner for preferences -->
     <Spinner
         android:id="@+id/preferencesSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="331dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby" />
+        app:layout_constraintTop_toBottomOf="@+id/preferencesLabel" />
 
     <Button
         android:id="@+id/editBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_width="318dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/wine"
         android:fontFamily="@font/bold"
         android:onClick="editProfile"
         android:text="Edit Profile"
         android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/preferencesSpinner" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_width="318dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/wine"
         android:fontFamily="@font/bold"
         android:onClick="saveProfile"
         android:text="Save"
+        android:textSize="18sp"
         android:id="@+id/saveBtn"
         android:textColor="@color/white"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferencesSpinner"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/preferencesSpinner" />
 
     <!-- NAVBAR BELOW -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -204,13 +264,13 @@
             <!-- Home Button -->
             <ImageButton
                 android:id="@+id/home_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="10dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:src="@drawable/feed_icon_button"
-                android:onClick="dashboardNav"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Home" />
+                android:contentDescription="Home"
+                android:onClick="dashboardNav"
+                android:src="@drawable/feed_icon_button" />
 
             <!-- Chat Button -->
             <ImageButton
@@ -247,4 +307,5 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

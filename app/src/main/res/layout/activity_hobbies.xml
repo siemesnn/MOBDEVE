@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".hobbies">
+
+    <TextView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:background="@color/wine"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:text="c h é r i e"
+        android:textColor="@color/white"
+        android:textSize="80px"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/bold"
+        android:text="What are your Hobbies and Interests"
+        android:textAlignment="center"
+        android:textColor="@color/wine"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--group hobbies-->
+
+    <TextView
+        android:id="@+id/hobby_header1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/bold"
+        android:text="Creativity"
+        android:textColor="@color/wine"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <LinearLayout
+        android:id="@+id/hobbyBox1"
+        android:layout_width="328dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_header1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby1"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Dancing"
+            app:chipIcon="@drawable/dance_icon_hobby"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby2"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Art"
+            app:chipIcon="@drawable/art_hobby_icon"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby3"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:text="Cosmetics"
+            app:chipIcon="@drawable/cosmetics"
+            app:chipStrokeColor="@color/wine" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hobbyBox2"
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox1">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby4"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Film"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/film_hobby_icon"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby5"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Singing"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/singing_hobby_icon"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby6"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Writing"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/writing_hobby"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hobby_header2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/bold"
+        android:text="Pets"
+        android:textColor="@color/wine"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/hobbyBox3"
+        android:layout_width="328dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_header2">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby7"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Dog"
+            app:chipIcon="@drawable/dog_icon_hobby"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby8"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Cat"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/cat_icon"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby9"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:text="Fish"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/fish_icon"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hobbyBox4"
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox3">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby10"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Rabbit"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/rabbit_icon"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby11"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Bird"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/bird_icon"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby12"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Turtle"
+            app:chipStrokeColor="@color/wine"
+            app:chipIcon="@drawable/turtle_icon"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/hobby_header3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/bold"
+        android:text="Sports and Fitness"
+        android:textColor="@color/wine"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox4" />
+
+    <LinearLayout
+        android:id="@+id/hobbyBox5"
+        android:layout_width="354dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_header3">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby13"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Basketball"
+            app:chipIcon="@drawable/bball_hobby"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby14"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginEnd="10dp"
+            android:text="Badminton"
+            app:chipIcon="@drawable/badminton_icon"
+            app:chipStrokeColor="@color/wine" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/hobby15"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:text="Yoga"
+            app:chipIcon="@drawable/yoga_hobby"
+            app:chipStrokeColor="@color/wine" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hobbyBox6"
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.655"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox5">
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/hobby16"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginEnd="10dp"
+        android:text="Hiking"
+        app:chipStrokeColor="@color/wine"
+        app:chipIcon="@drawable/hiking_hobby" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/hobby17"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginEnd="10dp"
+        android:text="Swimming"
+        app:chipStrokeColor="@color/wine"
+        app:chipIcon="@drawable/swimming"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/hobby18"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginEnd="10dp"
+        android:text="Running"
+        app:chipStrokeColor="@color/wine"
+        app:chipIcon="@drawable/running"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="72dp"
+        android:backgroundTint="@color/wine"
+        android:fontFamily="@font/bold"
+        android:onClick="exitView"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hobbyBox6" />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/bold"
+        android:onClick="exitView"
+        android:text="Cancel"
+        android:textColor="@color/wine"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addBtn"
+        app:strokeColor="@color/wine"
+        app:strokeWidth="2dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

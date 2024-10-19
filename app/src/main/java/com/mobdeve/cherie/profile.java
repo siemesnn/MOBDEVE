@@ -18,6 +18,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.chip.Chip;
+
 public class profile extends AppCompatActivity {
 
     private Spinner preferencesSpinner;
@@ -38,8 +40,10 @@ public class profile extends AppCompatActivity {
         ImageButton home = findViewById(R.id.home_button);
         ImageButton chat = findViewById(R.id.chat_button);
         ImageButton settings = findViewById(R.id.settings_button);
+        ImageButton editPFP = findViewById(R.id.edit_pfp);
         Button editBtn = findViewById(R.id.editBtn);
         Button saveBtn = findViewById(R.id.saveBtn);
+        Chip addBtn = findViewById(R.id.addHobby);
 
         // Initialize spinner
         preferencesSpinner = findViewById(R.id.preferencesSpinner);
@@ -70,11 +74,15 @@ public class profile extends AppCompatActivity {
         EditText profileBio = findViewById(R.id.profileBio);
         Button editBtn = findViewById(R.id.editBtn);
         Button saveBtn = findViewById(R.id.saveBtn);
+        Chip addBtn = findViewById(R.id.addHobby);
+        ImageButton editPFP = findViewById(R.id.edit_pfp);
 
         profileName.setFocusableInTouchMode(true);
         profileBio.setFocusableInTouchMode(true);
         editBtn.setVisibility(View.GONE);
         saveBtn.setVisibility(View.VISIBLE);
+        addBtn.setVisibility(View.VISIBLE);
+        editPFP.setVisibility(View.VISIBLE);
     }
 
     public void saveProfile(View v){
@@ -82,11 +90,15 @@ public class profile extends AppCompatActivity {
         EditText profileBio = findViewById(R.id.profileBio);
         Button editBtn = findViewById(R.id.editBtn);
         Button saveBtn = findViewById(R.id.saveBtn);
+        Chip addBtn = findViewById(R.id.addHobby);
+        ImageButton editPFP = findViewById(R.id.edit_pfp);
 
         profileName.setFocusableInTouchMode(false);
         profileBio.setFocusableInTouchMode(false);
         editBtn.setVisibility(View.VISIBLE);
         saveBtn.setVisibility(View.GONE);
+        addBtn.setVisibility(View.GONE);
+        editPFP.setVisibility(View.GONE);
     }
 
     public void dashboardNav(View v){
@@ -108,4 +120,10 @@ public class profile extends AppCompatActivity {
         Intent i = new Intent(this, matches.class);
         startActivity(i);
     }
+
+    public void hobbies(View v){
+        Intent i = new Intent(this, hobbies.class);
+        startActivity(i);
+    }
 }
+

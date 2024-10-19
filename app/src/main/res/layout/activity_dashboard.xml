@@ -129,6 +129,7 @@
         android:layout_height="60dp"
         android:backgroundTint="@color/wine"
         android:fontFamily="@font/bold"
+        android:onClick="matched"
         android:text="  Oui Oiu  "
         android:textColor="@color/white"
         android:textSize="50px"
