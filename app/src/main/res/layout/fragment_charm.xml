@@ -24,11 +24,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <EditText
             android:id="@+id/bio"
             android:layout_width="240dp"
             android:layout_height="120dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="12dp"
             android:backgroundTint="@color/wine"
             android:fontFamily="@font/regular"
             android:gravity="center"
@@ -45,7 +46,7 @@
             android:id="@+id/bioLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="304dp"
+            android:layout_marginTop="332dp"
             android:fontFamily="@font/regular"
             android:text="Write a short bio about yourself!"
             android:textColor="@color/black"
@@ -55,30 +56,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/eyeColor"
-            android:layout_width="200dp"
+        <Button
+            android:id="@+id/addInterest"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="@color/wine"
-            android:fontFamily="@font/regular"
-            android:gravity="center"
-            android:hint="placeholder"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textSize="20dp"
+            android:onClick="hobbies"
+            android:text="Add Interests"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/interestsLabel" />
-
-        <!--        pls put here the buttons on profile din-->
 
         <TextView
             android:id="@+id/interestsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="504dp"
+            android:layout_marginTop="552dp"
             android:fontFamily="@font/regular"
             android:text="What are your interests?"
             android:textColor="@color/black"

@@ -1,5 +1,6 @@
 package com.mobdeve.cherie.registered;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.google.android.material.chip.Chip;
 import com.mobdeve.cherie.R;
+import com.mobdeve.cherie.hobbies;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +65,26 @@ public class charm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_charm, container, false);
+        View view = inflater.inflate(R.layout.fragment_charm, container, false);
+
+        // Find the button in the layout
+        Button addBtn = view.findViewById(R.id.addInterest);
+
+        // Set the OnClickListener programmatically
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Call the hobbies method to navigate to the hobbies activity
+                hobbies(v);
+            }
+        });
+
+        return view; // Return the inflated view
+    }
+
+    // Method to handle the button click and start the hobbies activity
+    public void hobbies(View v) {
+        Intent i = new Intent(getActivity(), hobbies.class);
+        startActivity(i);
     }
 }
