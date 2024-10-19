@@ -9,4 +9,13 @@
         <item>Friendly</item>
     </string-array>
 
+    <string-array name="eye_color_array">
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Brown</item>
+        <item>Green</item>
+        <item>Gray</item>
+        <item>Hazel</item>
+        <item>Red</item>
+    </string-array>
 </resources>
