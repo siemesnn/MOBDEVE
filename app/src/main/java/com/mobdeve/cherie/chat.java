@@ -52,4 +52,9 @@ public class chat extends AppCompatActivity {
         Intent i = new Intent(this, matches.class);
         startActivity(i);
     }
+
+    public void conversations(View v){
+        Intent i = new Intent(this, conversations.class);
+        startActivity(i);
+    }
 }
