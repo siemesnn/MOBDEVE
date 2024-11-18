@@ -73,13 +73,13 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/usernameField"
+                android:id="@+id/emailField"
                 android:layout_width="350dp"
                 android:layout_height="56dp"
                 android:drawableStart="@drawable/round_person_24"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/regular"
-                android:hint="Username"
+                android:hint="Email"
                 android:padding="12dp"
                 android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
