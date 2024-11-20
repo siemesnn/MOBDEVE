@@ -14,18 +14,24 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class profile extends AppCompatActivity {
+    EditText profileName;
+    EditText profileBio;
+    TextView profileHobby;
+    Button editBtn;
+    Button saveBtn;
+    ImageButton home;
+    ImageButton chat;
+    ImageButton settings;
+
+    private FirebaseFirestore dbRef;
+    private FirebaseAuth currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-        Button saveBtn;
-        Button editBtn;
-
-        ImageButton home;
-        ImageButton chat;
-        ImageButton settings;
 
 
 
@@ -42,20 +48,37 @@ public class profile extends AppCompatActivity {
         chat = findViewById(R.id.chat_button);
         settings = findViewById(R.id.settings_button);
 
+        profileName=findViewById(R.id.profileName);
+        profileBio=findViewById(R.id.profileBio);
+        profileHobby=findViewById(R.id.profileHobby);
         editBtn=findViewById(R.id.editBtn);
         saveBtn=findViewById(R.id.saveBtn);
+
+        // get firestore db collection's user collections then get name and bio
+        dbRef = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance();
+
+        dbRef.collection("users").document(currentUser.getUid()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        String bio = documentSnapshot.getString("bio");
+                        String hobby = documentSnapshot.getString("hobby");
+                        // Set the retrieved data to the EditText fields
+                        profileName.setText(name);
+                        profileBio.setText(bio);
+                        profileHobby.setText(hobby);
+
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle any errors
+                    e.printStackTrace();
+                });
+
     }
 
     public void editProfile(View v){
-        EditText profileName;
-        EditText profileBio;
-        Button editBtn;
-        Button saveBtn;
-        profileName=findViewById(R.id.profileName);
-        profileBio=findViewById(R.id.profileBio);
-        editBtn=findViewById(R.id.editBtn);
-        saveBtn=findViewById(R.id.saveBtn);
-
 
         profileName.setFocusableInTouchMode(true);
         profileBio.setFocusableInTouchMode(true);
@@ -65,10 +88,7 @@ public class profile extends AppCompatActivity {
     }
 
     public void saveProfile(View v){
-        EditText profileName;
-        EditText profileBio;
-        Button editBtn;
-        Button saveBtn;
+
         profileName=findViewById(R.id.profileName);
         profileBio=findViewById(R.id.profileBio);
         editBtn=findViewById(R.id.editBtn);

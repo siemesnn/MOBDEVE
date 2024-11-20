@@ -136,7 +136,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/placeholder_hobby"
+        android:id="@+id/profileHobby"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/regular"
         android:text="Placeholder Hobby"
