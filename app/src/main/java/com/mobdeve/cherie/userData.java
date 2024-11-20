@@ -6,6 +6,9 @@ public class userData {
     private String bio;
     private String hobby;
 
+    public userData(){
+        // Empty constructor needed for Firestore
+    }
     userData(String name){
         this.name = name;
     }

@@ -19,17 +19,33 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class register extends AppCompatActivity {
 
     TextInputEditText usernameField, passwordField, confirmPasswordField, emailField;
     FirebaseAuth mAuth;
+    FirebaseFirestore dbRef;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent i = new Intent(getApplicationContext(), dashboard.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
+        dbRef = FirebaseFirestore.getInstance();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -66,9 +82,18 @@ public class register extends AppCompatActivity {
 //                            FirebaseUser user = mAuth.getCurrentUser();
 
                             // Redirect to login page
-                            Intent i = new Intent(register.this, login.class);
-                            startActivity(i);
-                            finish();
+                            userData newUser = new userData(username);
+
+                            dbRef.collection("users").document(mAuth.getUid()).set(newUser)
+                                    .addOnSuccessListener(aVoid -> {
+                                        // Redirect to login page
+                                        Intent i = new Intent(register.this, login.class);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(register.this, "Failed to create user data.", Toast.LENGTH_SHORT).show();
+                                    });
 
                         } else {
                             // If sign in fails, display a message to the user.

@@ -134,9 +134,9 @@
 <!--    put buttons below ? :DD -->
 
     <TextView
+        android:id="@+id/profileHobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/profileHobby"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/regular"
         android:text="Placeholder Hobby"
@@ -160,8 +160,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby" />
-    
+        app:layout_constraintTop_toBottomOf="@+id/profileHobby" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeholder_hobby"
+        app:layout_constraintTop_toBottomOf="@+id/profileHobby"
         app:layout_constraintVertical_bias="0.0"
 
         />
@@ -184,6 +184,18 @@
     
     
 <!--    NAVBAR BELOW-->
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Logout"
+        android:onClick="logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileHobby" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/custom_navbar"
@@ -247,4 +259,5 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

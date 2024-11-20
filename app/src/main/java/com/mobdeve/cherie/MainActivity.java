@@ -15,7 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if(user != null) {
+            Intent i = new Intent(getApplicationContext(), dashboard.class);
+            startActivity(i);
+            finish();
+        }
 
     }
         public void loginPage(View v){

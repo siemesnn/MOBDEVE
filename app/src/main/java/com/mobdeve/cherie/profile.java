@@ -61,13 +61,13 @@ public class profile extends AppCompatActivity {
         dbRef.collection("users").document(currentUser.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        String name = documentSnapshot.getString("name");
-                        String bio = documentSnapshot.getString("bio");
-                        String hobby = documentSnapshot.getString("hobby");
+                        userData user = documentSnapshot.toObject(userData.class);
                         // Set the retrieved data to the EditText fields
-                        profileName.setText(name);
-                        profileBio.setText(bio);
-                        profileHobby.setText(hobby);
+                        if(user != null){
+                            profileName.setText(user.getName());
+                            profileBio.setText(user.getBio());
+                            profileHobby.setText(user.getHobby());
+                        }
 
                     }
                 })
@@ -76,6 +76,13 @@ public class profile extends AppCompatActivity {
                     e.printStackTrace();
                 });
 
+    }
+
+    public void logout(View v){
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     public void editProfile(View v){
