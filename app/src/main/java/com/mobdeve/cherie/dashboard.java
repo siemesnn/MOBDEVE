@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class dashboard extends AppCompatActivity {
 
@@ -22,7 +25,8 @@ public class dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_menu);
+//        replaceFragment(new dashboardFragment());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -36,22 +40,24 @@ public class dashboard extends AppCompatActivity {
     }
 
     public void dashboardNav(View v){
-        Intent i = new Intent(this, dashboard.class);
-        startActivity(i);
+        replaceFragment(new dashboardFragment());
     }
 
     public void chatNav(View v){
-        Intent i = new Intent(this, chat.class);
-        startActivity(i);
+        replaceFragment(new chatFragment());
     }
 
     public void settingsNav(View v){
-        Intent i = new Intent(this, profile.class);
-        startActivity(i);
+        replaceFragment(new profileFragment());
     }
 
     public void matchesNav(View v){
-        Intent i = new Intent(this, matches.class);
-        startActivity(i);
+        replaceFragment(new matchesFragment());
+}
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_frame, fragment);
+        fragmentTransaction.commit();
     }
 }
