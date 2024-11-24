@@ -5,6 +5,7 @@ public class userData {
     private String name;
     private String bio;
     private String hobby;
+    private int age;
 
     public userData(){
         // Empty constructor needed for Firestore
@@ -35,5 +36,13 @@ public class userData {
 
     public String getHobby(){
         return this.hobby;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
