@@ -21,14 +21,17 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dashboard, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         userData profile = profiles.get(position);
-        holder.nameAge.setText(profile.getName());
+
+        String nameAge = profile.getName() + ", " + profile.getAge();
+
+        holder.nameAge.setText(nameAge);
         holder.bio.setText(profile.getBio());
         holder.hobby.setText(profile.getHobby());
     }

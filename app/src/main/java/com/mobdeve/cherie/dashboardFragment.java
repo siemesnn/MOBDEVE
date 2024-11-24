@@ -9,11 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -25,6 +30,10 @@ public class dashboardFragment extends Fragment {
     private ArrayList<userData> listProfiles;
     private FirebaseFirestore dbRef;
     private int currentProfileIndex = 0;
+    private String currentUserId;
+
+    private TextView noMoreTextView;
+
 
     @Nullable
     @Override
@@ -40,12 +49,17 @@ public class dashboardFragment extends Fragment {
         //call items
         listProfiles = new ArrayList<>();
         dbRef = FirebaseFirestore.getInstance();
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         fetchProfiles();
 
         //set adapter
         adapter = new ProfileAdapter(listProfiles);
         recyclerView.setAdapter(adapter);
 
+        noMoreTextView = view.findViewById(R.id.noMoreText);
+        noMoreTextView.setVisibility(View.GONE);
+
+        // If there is no profile on load, notify user there is no more profiles
         view.findViewById(R.id.yesButton).setOnClickListener(v -> yesButton());
         view.findViewById(R.id.noButton).setOnClickListener(v -> noButton());
         return view;
@@ -53,14 +67,14 @@ public class dashboardFragment extends Fragment {
 
     public void yesButton(){
         //put logic here
-        // mark that profile with regards to current user as yes
+        likeUser();
         showNextItem();
     }
 
     public void noButton(){
         //put logic here
         // mark that profile with regards to current user as no
-        showPrevItem();
+        showNextItem();
     }
 
     private void showNextItem(){
@@ -68,6 +82,12 @@ public class dashboardFragment extends Fragment {
         if (currentProfileIndex < listProfiles.size() - 1){
             currentProfileIndex++;
             recyclerView.smoothScrollToPosition(currentProfileIndex);
+        } else {
+            noMoreTextView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            //hide yes no button
+            getView().findViewById(R.id.yesButton).setVisibility(View.GONE);
+            getView().findViewById(R.id.noButton).setVisibility(View.GONE);
         }
     }
 
@@ -80,15 +100,63 @@ public class dashboardFragment extends Fragment {
         }
     }
 
-    private void fetchProfiles(){
+    private void likeUser(){
+        // this function will mark that the current user liked the current profile
+        userData likedUser = listProfiles.get(currentProfileIndex);
+        // add the liked user to the current user's "likedUsers" collection
         dbRef.collection("users")
+                .document(currentUserId)
+                .collection("likedUsers")
+                .document(likedUser.getUserId())
+                .set(likedUser)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> e.printStackTrace());
+    }
+
+    public void checkProfileListOnStart(){
+        if (listProfiles.size() == 0){
+            noMoreTextView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+            getView().findViewById(R.id.yesButton).setVisibility(View.GONE);
+            getView().findViewById(R.id.noButton).setVisibility(View.GONE);
+        } else {
+            noMoreTextView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void fetchProfiles(){
+
+        // Get the current user's liked profiles
+        dbRef.collection("users")
+                .document(currentUserId)
+                .collection("likedUsers")
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        userData profile = documentSnapshot.toObject(userData.class);
-                        listProfiles.add(profile);
+                .addOnSuccessListener(likedUsersSnapshot -> {
+                    List<String> likedUserIds = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : likedUsersSnapshot) {
+                        likedUserIds.add(document.getId());
                     }
-                    adapter.notifyDataSetChanged();
+                    // Add the current user's ID to the list to filter out self
+                    likedUserIds.add(currentUserId);
+
+                    // Fetch all profiles excluding liked profiles and self
+                    dbRef.collection("users")
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                listProfiles.clear();
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    userData profile = documentSnapshot.toObject(userData.class);
+                                    if (!likedUserIds.contains(profile.getUserId())) {
+                                        listProfiles.add(profile);
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                checkProfileListOnStart();
+                            })
+                            .addOnFailureListener(e -> e.printStackTrace());
                 })
                 .addOnFailureListener(e -> e.printStackTrace());
     }

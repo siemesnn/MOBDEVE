@@ -79,12 +79,12 @@ public class register extends AppCompatActivity {
 //                            // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(register.this, "Account created.",
                                     Toast.LENGTH_SHORT).show();
-//                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = mAuth.getCurrentUser();
 
                             // Redirect to login page
-                            userData newUser = new userData(username);
+                            userData newUser = new userData(username, user.getUid());
 
-                            dbRef.collection("users").document(mAuth.getUid()).set(newUser)
+                            dbRef.collection("users").document(user.getUid()).set(newUser)
                                     .addOnSuccessListener(aVoid -> {
                                         // Redirect to login page
                                         Intent i = new Intent(register.this, login.class);

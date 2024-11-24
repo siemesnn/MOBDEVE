@@ -6,12 +6,19 @@ public class userData {
     private String bio;
     private String hobby;
     private int age;
+    private String userId;
 
     public userData(){
         // Empty constructor needed for Firestore
     }
     userData(String name){
         this.name = name;
+    }
+
+    //When fetching data from Firestore
+    userData(String name, String USER_ID){
+        this.name = name;
+        this.userId = USER_ID;
     }
 
     public void setName(String name){
@@ -43,6 +50,10 @@ public class userData {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
+    }
+
+    public String getUserId(){
+        return this.userId;
     }
 }
