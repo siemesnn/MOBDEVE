@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -108,11 +109,49 @@ public class dashboardFragment extends Fragment {
                 .document(currentUserId)
                 .collection("likedUsers")
                 .document(likedUser.getUserId())
-                .set(likedUser)
+                .set(new HashMap<String, Object>() {{
+                    put("name", likedUser.getName());
+                }})
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                    // Check if the liked user also liked the current user
+                    dbRef.collection("users")
+                            .document(likedUser.getUserId())
+                            .collection("likedUsers")
+                            .document(currentUserId)
+                            .get()
+                            .addOnSuccessListener(documentSnapshot -> {
+                                if (documentSnapshot.exists()) {
+                                    // Add each user to the other's matchedUsers collection
+                                    dbRef.collection("users")
+                                            .document(currentUserId)
+                                            .collection("matchedUsers")
+                                            .document(likedUser.getUserId())
+                                            .set(new HashMap<String, Object>() {{
+                                                put("name", likedUser.getName());
+                                            }})
+                                            .addOnSuccessListener(aVoid1 -> {
+                                                dbRef.collection("users")
+                                                        .document(likedUser.getUserId())
+                                                        .collection("matchedUsers")
+                                                        .document(currentUserId)
+                                                        .set(new HashMap<String, Object>() {{
+                                                            put("name", currentUserId);
+                                                        }})
+                                                        .addOnSuccessListener(aVoid2 -> {
+                                                            Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                                                        })
+                                                        .addOnFailureListener(e -> e.printStackTrace());
+                                            })
+                                            .addOnFailureListener(e -> e.printStackTrace());
+                                } else {
+                                    Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(e -> e.printStackTrace());
                 })
-                .addOnFailureListener(e -> e.printStackTrace());
+                .addOnFailureListener(e -> e.printStackTrace());// TODO: Check if the current user is also liked by the liked user, if so, create a match
+
     }
 
     public void checkProfileListOnStart(){
