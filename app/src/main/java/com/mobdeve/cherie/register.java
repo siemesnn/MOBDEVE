@@ -86,8 +86,8 @@ public class register extends AppCompatActivity {
 
                             dbRef.collection("users").document(user.getUid()).set(newUser)
                                     .addOnSuccessListener(aVoid -> {
-                                        // Redirect to login page
-                                        Intent i = new Intent(register.this, login.class);
+                                        // Redirect to age verification page
+                                        Intent i = new Intent(register.this, ageHobby.class);
                                         startActivity(i);
                                         finish();
                                     })
@@ -103,5 +103,10 @@ public class register extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void home(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
