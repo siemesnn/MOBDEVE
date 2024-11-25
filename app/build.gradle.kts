@@ -51,6 +51,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.circleimageview)
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.0")
 
 //    implementation(platform(libs.firebase.bom))
 //    implementation(libs.firebase.analytics)

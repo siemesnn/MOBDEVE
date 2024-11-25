@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -139,6 +140,7 @@ public class dashboardFragment extends Fragment {
                                                             put("name", currentUserId);
                                                         }})
                                                         .addOnSuccessListener(aVoid2 -> {
+                                                            createChatroom(currentUserId, likedUser.getUserId());
                                                             Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
                                                         })
                                                         .addOnFailureListener(e -> e.printStackTrace());
@@ -150,8 +152,23 @@ public class dashboardFragment extends Fragment {
                             })
                             .addOnFailureListener(e -> e.printStackTrace());
                 })
-                .addOnFailureListener(e -> e.printStackTrace());// TODO: Check if the current user is also liked by the liked user, if so, create a match
+                .addOnFailureListener(e -> e.printStackTrace());
 
+    }
+
+    private void createChatroom(String userId1, String userId2) {
+        Map<String, Object> chatroomData = new HashMap<>();
+        chatroomData.put("userId1", userId1);
+        chatroomData.put("userId2", userId2);
+
+        dbRef.collection("chatrooms")
+                .add(chatroomData)
+                .addOnSuccessListener(documentReference -> {
+//                    Log.d("dashboardFragment", "Chatroom created with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+//                    Log.w("dashboardFragment", "Error creating chatroom", e);
+                });
     }
 
     public void checkProfileListOnStart(){

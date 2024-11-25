@@ -44,13 +44,14 @@ public class chatFragment extends Fragment {
         listMatches = new ArrayList<>();
 
         dbRef = FirebaseFirestore.getInstance();
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        currentUserId = FirebaseAuth.getInstance().getUid();
         fetchMatches();
+
 
         matchAdapter = new MatchAdapter(listMatches);
         recyclerViewMatch.setAdapter(matchAdapter);
 
-        chatAdapter = new ChatAdapter(listMatches);
+        chatAdapter = new ChatAdapter(getContext(), listMatches);
         recyclerViewChat.setAdapter(chatAdapter);
 
         return view;
