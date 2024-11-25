@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                             String chatroomId = task.getResult().getDocuments().get(0).getId();
                             Intent i = new Intent(context, ChatroomActivity.class);
                             i.putExtra("chatroomId", chatroomId);
+                            i.putExtra("otherUsername", match.getName());
                             context.startActivity(i);
                         } else {
                             //check in userid2 and userid1
@@ -70,6 +70,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                                             String chatroomId = task1.getResult().getDocuments().get(0).getId();
                                             Intent i = new Intent(context, ChatroomActivity.class);
                                             i.putExtra("chatroomId", chatroomId);
+                                            i.putExtra("otherUsername", match.getName());
                                             context.startActivity(i);
                                         }
                                     });
@@ -89,7 +90,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.text_view_name);
+            name = itemView.findViewById(R.id.match_scroll_name_age);
             profileImage = itemView.findViewById(R.id.image_view_profile);
         }
     }

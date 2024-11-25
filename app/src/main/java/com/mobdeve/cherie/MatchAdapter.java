@@ -29,6 +29,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         userData match = matches.get(position);
+        holder.name.setText(match.getName());
         // How image? huhuhu
     }
 
@@ -39,10 +40,12 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView profileImage;
+        TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             profileImage = itemView.findViewById(R.id.image_view_match);
+            name = itemView.findViewById(R.id.item_name);
         }
     }
 }

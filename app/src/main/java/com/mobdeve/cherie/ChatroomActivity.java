@@ -6,11 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +24,7 @@ import java.util.Map;
 
 public class ChatroomActivity extends AppCompatActivity {
     // Views needed
-    private TextView welcomeTv;
+    private TextView otherUserTv;
     private EditText messageEtv;
     private Button sendBtn;
 
@@ -41,20 +37,22 @@ public class ChatroomActivity extends AppCompatActivity {
     private FirebaseFirestore dbRef;
     private String chatroomId;
     private String username;
+    private String otherUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatroom);
 
-        this.welcomeTv = findViewById(R.id.welcomeTv);
+        this.otherUserTv = findViewById(R.id.otherUserTextView);
         this.messageEtv = findViewById(R.id.messageEtv);
         this.sendBtn = findViewById(R.id.sendBtn);
         this.recyclerView = findViewById(R.id.chatRecyclerView);
 
         // Get intents
         this.chatroomId = getIntent().getStringExtra("chatroomId");
-
+        this.otherUsername = getIntent().getStringExtra("otherUsername");
+        this.otherUserTv.setText(otherUsername);
         // Initialize Firebase things
         dbRef = FirebaseFirestore.getInstance();
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -64,7 +62,7 @@ public class ChatroomActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         userData currentUserData = task.getResult().toObject(userData.class);
                         this.username = currentUserData.getName();
-                        this.welcomeTv.setText("Welcome, " + username + "!");
+
 
                         // Get the messages from the Message Collection within the specific chatroom
                         Query query = dbRef
@@ -133,8 +131,10 @@ public class ChatroomActivity extends AppCompatActivity {
                         });
             }
         });
+
     }
 
+    // This function makes it a realtime chatroom by lconstantly listening
     @Override
     protected void onStart() {
         super.onStart();

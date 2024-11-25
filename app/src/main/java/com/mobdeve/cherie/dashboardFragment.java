@@ -103,57 +103,65 @@ public class dashboardFragment extends Fragment {
     }
 
     private void likeUser(){
-        // this function will mark that the current user liked the current profile
         userData likedUser = listProfiles.get(currentProfileIndex);
-        // add the liked user to the current user's "likedUsers" collection
-        dbRef.collection("users")
-                .document(currentUserId)
-                .collection("likedUsers")
-                .document(likedUser.getUserId())
-                .set(new HashMap<String, Object>() {{
-                    put("name", likedUser.getName());
-                }})
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
-                    // Check if the liked user also liked the current user
-                    dbRef.collection("users")
-                            .document(likedUser.getUserId())
-                            .collection("likedUsers")
-                            .document(currentUserId)
-                            .get()
-                            .addOnSuccessListener(documentSnapshot -> {
-                                if (documentSnapshot.exists()) {
-                                    // Add each user to the other's matchedUsers collection
-                                    dbRef.collection("users")
-                                            .document(currentUserId)
-                                            .collection("matchedUsers")
-                                            .document(likedUser.getUserId())
-                                            .set(new HashMap<String, Object>() {{
-                                                put("name", likedUser.getName());
-                                            }})
-                                            .addOnSuccessListener(aVoid1 -> {
-                                                dbRef.collection("users")
-                                                        .document(likedUser.getUserId())
-                                                        .collection("matchedUsers")
-                                                        .document(currentUserId)
-                                                        .set(new HashMap<String, Object>() {{
-                                                            put("name", currentUserId);
-                                                        }})
-                                                        .addOnSuccessListener(aVoid2 -> {
-                                                            createChatroom(currentUserId, likedUser.getUserId());
-                                                            Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
-                                                        })
-                                                        .addOnFailureListener(e -> e.printStackTrace());
-                                            })
-                                            .addOnFailureListener(e -> e.printStackTrace());
-                                } else {
-                                    Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(e -> e.printStackTrace());
-                })
-                .addOnFailureListener(e -> e.printStackTrace());
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        // Retrieve the current user's name
+        dbRef.collection("users").document(currentUserId).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                String currentUserName = documentSnapshot.getString("name");
+
+                // Add the liked user to the current user's "likedUsers" collection
+                dbRef.collection("users")
+                        .document(currentUserId)
+                        .collection("likedUsers")
+                        .document(likedUser.getUserId())
+                        .set(new HashMap<String, Object>() {{
+                            put("name", likedUser.getName());
+                        }})
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+
+                            // Check if the liked user also liked the current user
+                            dbRef.collection("users")
+                                    .document(likedUser.getUserId())
+                                    .collection("likedUsers")
+                                    .document(currentUserId)
+                                    .get()
+                                    .addOnSuccessListener(documentSnapshot1 -> {
+                                        if (documentSnapshot1.exists()) {
+                                            // Add each user to the other's matchedUsers collection
+                                            dbRef.collection("users")
+                                                    .document(currentUserId)
+                                                    .collection("matchedUsers")
+                                                    .document(likedUser.getUserId())
+                                                    .set(new HashMap<String, Object>() {{
+                                                        put("name", likedUser.getName());
+                                                    }})
+                                                    .addOnSuccessListener(aVoid1 -> {
+                                                        dbRef.collection("users")
+                                                                .document(likedUser.getUserId())
+                                                                .collection("matchedUsers")
+                                                                .document(currentUserId)
+                                                                .set(new HashMap<String, Object>() {{
+                                                                    put("name", currentUserName); // Use the current user's name
+                                                                }})
+                                                                .addOnSuccessListener(aVoid2 -> {
+                                                                    createChatroom(currentUserId, likedUser.getUserId());
+                                                                    Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                                                                })
+                                                                .addOnFailureListener(e -> e.printStackTrace());
+                                                    })
+                                                    .addOnFailureListener(e -> e.printStackTrace());
+                                        } else {
+                                            Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> e.printStackTrace());
+                        })
+                        .addOnFailureListener(e -> e.printStackTrace());
+            }
+        }).addOnFailureListener(e -> e.printStackTrace());
     }
 
     private void createChatroom(String userId1, String userId2) {
