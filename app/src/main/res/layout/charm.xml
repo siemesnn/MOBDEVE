@@ -8,16 +8,44 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CHARM?"
+        android:text="Fun Fact"
         android:textSize="16sp"
         android:paddingBottom="8dp"/>
 
     <EditText
-        android:id="@+id/ageInput"
+        android:id="@+id/funFactInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your age"
-        android:inputType="number"/>
+        android:hint="Enter a fun fact"
+        android:inputType="text"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reveal Info"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
 
+    <EditText
+        android:id="@+id/revealInfoInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter info to reveal"
+        android:inputType="text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Favorite Things"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/favoriteThingsInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your favorite things"
+        android:inputType="text"/>
 </LinearLayout>

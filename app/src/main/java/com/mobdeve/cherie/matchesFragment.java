@@ -27,8 +27,8 @@ public class matchesFragment extends Fragment {
 
     private FirebaseFirestore dbRef;
     private String currentUserId;
-    private ArrayList<userData> likedUsers;
-    private ArrayList<userData> matchedUsers;
+    private ArrayList<UserData> likedUsers;
+    private ArrayList<UserData> matchedUsers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +72,7 @@ public class matchesFragment extends Fragment {
                                     .get()
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            userData match = task1.getResult().toObject(userData.class);
+                                            UserData match = task1.getResult().toObject(UserData.class);
                                             matchedUsers.add(match);
                                             matchAdapter.notifyDataSetChanged();
                                         }
@@ -88,14 +88,14 @@ public class matchesFragment extends Fragment {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        ArrayList<userData> allLikedUsers = new ArrayList<>();
+                        ArrayList<UserData> allLikedUsers = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             String likedUserId = document.getId();
                             dbRef.collection("users").document(likedUserId)
                                     .get()
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            userData likedUser = task1.getResult().toObject(userData.class);
+                                            UserData likedUser = task1.getResult().toObject(UserData.class);
                                             allLikedUsers.add(likedUser);
                                             if (allLikedUsers.size() == task.getResult().size()) {
                                                 filterLikedUsers(allLikedUsers);
@@ -107,13 +107,13 @@ public class matchesFragment extends Fragment {
                 });
     }
 
-    private void filterLikedUsers(ArrayList<userData> allLikedUsers) {
+    private void filterLikedUsers(ArrayList<UserData> allLikedUsers) {
         Set<String> matchedUserIds = new HashSet<>();
-        for (userData user : matchedUsers) {
+        for (UserData user : matchedUsers) {
             matchedUserIds.add(user.getUserId());
         }
 
-        for (userData likedUser : allLikedUsers) {
+        for (UserData likedUser : allLikedUsers) {
             if (!matchedUserIds.contains(likedUser.getUserId())) {
                 likedUsers.add(likedUser);
             }

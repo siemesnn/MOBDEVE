@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +28,7 @@ public class dashboardFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ProfileAdapter adapter;
-    private ArrayList<userData> listProfiles;
+    private ArrayList<UserData> listProfiles;
     private FirebaseFirestore dbRef;
     private int currentProfileIndex = 0;
     private String currentUserId;
@@ -103,7 +102,7 @@ public class dashboardFragment extends Fragment {
     }
 
     private void likeUser(){
-        userData likedUser = listProfiles.get(currentProfileIndex);
+        UserData likedUser = listProfiles.get(currentProfileIndex);
         String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Retrieve the current user's name
@@ -212,7 +211,7 @@ public class dashboardFragment extends Fragment {
                             .addOnSuccessListener(queryDocumentSnapshots -> {
                                 listProfiles.clear();
                                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                    userData profile = documentSnapshot.toObject(userData.class);
+                                    UserData profile = documentSnapshot.toObject(UserData.class);
                                     if (!likedUserIds.contains(profile.getUserId())) {
                                         listProfiles.add(profile);
                                     }

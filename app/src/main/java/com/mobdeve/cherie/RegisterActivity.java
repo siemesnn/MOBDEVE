@@ -2,7 +2,6 @@ package com.mobdeve.cherie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     TextInputEditText usernameField, passwordField, confirmPasswordField, emailField;
     FirebaseAuth mAuth;
@@ -77,27 +76,27 @@ public class register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 //                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(register.this, "Account created.",
+                            Toast.makeText(RegisterActivity.this, "Account created.",
                                     Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
 
                             // Redirect to login page
-                            userData newUser = new userData(username, user.getUid());
+                            UserData newUser = new UserData(username, user.getUid());
 
                             dbRef.collection("users").document(user.getUid()).set(newUser)
                                     .addOnSuccessListener(aVoid -> {
                                         // Redirect to age verification page
-                                        Intent i = new Intent(register.this, ageHobby.class);
+                                        Intent i = new Intent(RegisterActivity.this, VerifyAgeActivity.class);
                                         startActivity(i);
                                         finish();
                                     })
                                     .addOnFailureListener(e -> {
-                                        Toast.makeText(register.this, "Failed to create user data.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this, "Failed to create user data.", Toast.LENGTH_SHORT).show();
                                     });
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(register.this, "Authentication failed.",
+                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

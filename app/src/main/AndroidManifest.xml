@@ -21,7 +21,7 @@
             android:exported="false"
             android:theme="@style/Theme.Cherie" />
         <activity
-            android:name=".ageHobby"
+            android:name=".AgeVerificationActivity"
             android:exported="false" />
         <activity
             android:name=".ChatroomActivity"
@@ -45,7 +45,7 @@
             android:name=".registered_info"
             android:exported="false" />
         <activity
-            android:name=".additional_info"
+            android:name=".VerifyAgeActivity"
             android:exported="false" />
         <activity
             android:name=".test"
@@ -54,7 +54,7 @@
             android:name=".feed"
             android:exported="false" />
         <activity
-            android:name=".register"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".login"

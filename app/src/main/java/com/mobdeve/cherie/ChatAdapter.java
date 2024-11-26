@@ -18,14 +18,14 @@ import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
-    private List<userData> matches;
+    private List<UserData> matches;
     private Context context;
     private FirebaseFirestore dbRef;
     private FirebaseAuth mAuth;
 
     private String currentUsername;
 
-    public ChatAdapter(Context context, List<userData> matches) {
+    public ChatAdapter(Context context, List<UserData> matches) {
         this.context = context;
         this.matches = matches;
     }
@@ -39,7 +39,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        userData match = matches.get(position);
+        UserData match = matches.get(position);
         holder.name.setText(match.getName());
         // Load images?
         dbRef = FirebaseFirestore.getInstance();

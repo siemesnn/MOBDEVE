@@ -1,8 +1,5 @@
 package com.mobdeve.cherie;
 
-import static java.security.AccessController.getContext;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,7 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class InspectProfileActivity extends AppCompatActivity {
@@ -23,7 +19,7 @@ public class InspectProfileActivity extends AppCompatActivity {
     TextView HobbyView;
 
     String otherUserId;
-    userData otherUser;
+    UserData otherUser;
     String currentUserId;
 
     private FirebaseFirestore dbRef;
@@ -53,7 +49,7 @@ public class InspectProfileActivity extends AppCompatActivity {
         //Get user data from Firestore
         dbRef.collection("users").document(otherUserId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                otherUser = task.getResult().toObject(userData.class);
+                otherUser = task.getResult().toObject(UserData.class);
                 NameView.setText(otherUser.getName());
                 BioView.setText(otherUser.getBio());
                 HobbyView.setText(otherUser.getHobby());

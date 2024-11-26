@@ -3,7 +3,6 @@ package com.mobdeve.cherie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void registerPage(View v){
-            Intent i = new Intent(MainActivity.this, register.class);
+            Intent i = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(i);
         }
 

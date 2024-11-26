@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +47,7 @@ public class profileFragment extends Fragment {
         dbRef.collection("users").document(currentUser.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        userData user = documentSnapshot.toObject(userData.class);
+                        UserData user = documentSnapshot.toObject(UserData.class);
                         if (user != null) {
                             profileName.setText(user.getName());
                             profileBio.setText(user.getBio());

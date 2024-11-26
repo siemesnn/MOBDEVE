@@ -61,7 +61,7 @@ public class profile extends AppCompatActivity {
         dbRef.collection("users").document(currentUser.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        userData user = documentSnapshot.toObject(userData.class);
+                        UserData user = documentSnapshot.toObject(UserData.class);
                         // Set the retrieved data to the EditText fields
                         if(user != null){
                             profileName.setText(user.getName());

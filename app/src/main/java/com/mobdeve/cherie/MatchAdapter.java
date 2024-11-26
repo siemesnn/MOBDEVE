@@ -13,9 +13,9 @@ import java.util.List;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
 
-    private List<userData> matches;
+    private List<UserData> matches;
 
-    public MatchAdapter(List<userData> matches) {
+    public MatchAdapter(List<UserData> matches) {
         this.matches = matches;
     }
 
@@ -28,7 +28,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        userData match = matches.get(position);
+        UserData match = matches.get(position);
         holder.name.setText(match.getName());
         // How image? huhuhu
     }

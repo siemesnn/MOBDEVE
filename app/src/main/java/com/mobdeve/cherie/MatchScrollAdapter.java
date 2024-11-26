@@ -13,9 +13,9 @@ import java.util.List;
 
 public class MatchScrollAdapter extends RecyclerView.Adapter<MatchScrollAdapter.ViewHolder> {
 
-    private List<userData> matches;
+    private List<UserData> matches;
 
-    public MatchScrollAdapter(List<userData> matches) {
+    public MatchScrollAdapter(List<UserData> matches) {
         this.matches = matches;
     }
 
@@ -28,7 +28,7 @@ public class MatchScrollAdapter extends RecyclerView.Adapter<MatchScrollAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        userData match = matches.get(position);
+        UserData match = matches.get(position);
         String nameAge = match.getName() + ", " + match.getAge();
         holder.nameAgeView.setText(nameAge);
         holder.bioView.setText(match.getBio());

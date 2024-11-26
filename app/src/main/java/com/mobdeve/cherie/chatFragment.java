@@ -24,7 +24,7 @@ public class chatFragment extends Fragment {
     private MatchAdapter matchAdapter;
     private FirebaseFirestore dbRef;
     private String currentUserId;
-    private ArrayList<userData> listMatches;
+    private ArrayList<UserData> listMatches;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +68,7 @@ public class chatFragment extends Fragment {
                                     .get()
                                     .addOnCompleteListener(task1 -> {
                                         if (task1.isSuccessful()) {
-                                            userData match = task1.getResult().toObject(userData.class);
+                                            UserData match = task1.getResult().toObject(UserData.class);
                                             listMatches.add(match);
                                             chatAdapter.notifyDataSetChanged();
                                             matchAdapter.notifyDataSetChanged();

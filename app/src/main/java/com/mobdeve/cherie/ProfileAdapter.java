@@ -12,9 +12,9 @@ import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
-    private List<userData> profiles;
+    private List<UserData> profiles;
 
-    public ProfileAdapter(List<userData> profiles) {
+    public ProfileAdapter(List<UserData> profiles) {
         this.profiles = profiles;
     }
 
@@ -27,7 +27,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        userData profile = profiles.get(position);
+        UserData profile = profiles.get(position);
 
         String nameAge = profile.getName() + ", " + profile.getAge();
 

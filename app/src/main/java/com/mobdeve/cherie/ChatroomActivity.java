@@ -65,7 +65,7 @@ public class ChatroomActivity extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        userData currentUserData = task.getResult().toObject(userData.class);
+                        UserData currentUserData = task.getResult().toObject(UserData.class);
                         this.username = currentUserData.getName();
 
 

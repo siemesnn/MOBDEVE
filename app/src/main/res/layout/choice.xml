@@ -8,16 +8,58 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CHOICE?"
+        android:text="Gender Preference"
         android:textSize="16sp"
         android:paddingBottom="8dp"/>
 
-    <EditText
-        android:id="@+id/ageInput"
+    <RadioGroup
+        android:id="@+id/genderPreferenceGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your age"
-        android:inputType="number"/>
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/preferenceMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"/>
 
+        <RadioButton
+            android:id="@+id/preferenceFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"/>
+
+        <RadioButton
+            android:id="@+id/preferenceOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Both"/>
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intentions"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"/>
+
+    <CheckBox
+        android:id="@+id/intentionCasualDating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Casual Dating"/>
+
+    <CheckBox
+        android:id="@+id/intentionLongTerm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long-term Relationships"/>
+
+    <CheckBox
+        android:id="@+id/intentionMarriage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dating to Marry"/>
 </LinearLayout>
