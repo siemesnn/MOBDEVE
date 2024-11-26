@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,9 +25,11 @@ import java.util.Map;
 
 public class ChatroomActivity extends AppCompatActivity {
     // Views needed
+    private int CHAT_BAR_MAX = 75;
     private TextView otherUserTv;
     private EditText messageEtv;
     private Button sendBtn;
+    private ProgressBar progressBar;
 
     // RecyclerView Components
     private RecyclerView recyclerView;
@@ -48,6 +51,8 @@ public class ChatroomActivity extends AppCompatActivity {
         this.messageEtv = findViewById(R.id.messageEtv);
         this.sendBtn = findViewById(R.id.sendBtn);
         this.recyclerView = findViewById(R.id.chatRecyclerView);
+        this.progressBar = findViewById(R.id.progressBar);
+        this.progressBar.setMax(CHAT_BAR_MAX);
 
         // Get intents
         this.chatroomId = getIntent().getStringExtra("chatroomId");
@@ -82,6 +87,7 @@ public class ChatroomActivity extends AppCompatActivity {
                             @Override
                             public void onItemRangeInserted(int positionStart, int itemCount) {
                                 recyclerView.scrollToPosition(myFirestoreRecyclerAdapter.getItemCount() - 1);
+                                updateProgressBar();
                             }
                         });
 
@@ -121,6 +127,7 @@ public class ChatroomActivity extends AppCompatActivity {
                             public void onSuccess(DocumentReference documentReference) {
                                 // "Reset" the message in the EditText
                                 messageEtv.setText("");
+                                updateProgressBar();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -134,7 +141,7 @@ public class ChatroomActivity extends AppCompatActivity {
 
     }
 
-    // This function makes it a realtime chatroom by lconstantly listening
+    // This function makes it a realtime chatroom by constantly listening
     @Override
     protected void onStart() {
         super.onStart();
@@ -149,5 +156,18 @@ public class ChatroomActivity extends AppCompatActivity {
         if (this.myFirestoreRecyclerAdapter != null) {
             this.myFirestoreRecyclerAdapter.stopListening();
         }
+    }
+    private void updateProgressBar() {
+        dbRef.collection("chatrooms")
+                .document(chatroomId)
+                .collection("messages")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        int messageCount = task.getResult().size();
+                        int progress = messageCount;
+                        progressBar.setProgress(progress);
+                    }
+                });
     }
 }

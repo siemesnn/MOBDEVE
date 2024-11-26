@@ -94,5 +94,9 @@ public class InspectProfileActivity extends AppCompatActivity {
                     }});
     }
 
+    public void startGame(){
+
+    }
+
 
 }
