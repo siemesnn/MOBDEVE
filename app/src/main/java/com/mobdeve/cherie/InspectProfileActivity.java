@@ -164,8 +164,9 @@ public class InspectProfileActivity extends AppCompatActivity {
                     }});
     }
 
-    public void startGame(){
-
+    public void startGame(View view){
+        Intent i = new Intent(InspectProfileActivity.this, GameshowActivity.class);
+        startActivity(i);
     }
 
 
