@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +26,9 @@ public class matchesFragment extends Fragment {
     private SentInvitesAdapter likeAdapter;
     private MatchScrollAdapter matchAdapter;
 
+    private TextView emptyLikes;
+    private TextView emptyMatches;
+
     private FirebaseFirestore dbRef;
     private String currentUserId;
     private ArrayList<UserData> likedUsers;
@@ -35,6 +39,8 @@ public class matchesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_matches, container, false);
+        emptyLikes = view.findViewById(R.id.emptyLikes);
+        emptyMatches = view.findViewById(R.id.emptyMatches);
 
         // This is recycler view for liked users
         recyclerViewLike = view.findViewById(R.id.likedRecyclerViews);
@@ -119,5 +125,16 @@ public class matchesFragment extends Fragment {
             }
         }
         likeAdapter.notifyDataSetChanged();
+
+        if (likedUsers.isEmpty())
+            emptyLikes.setVisibility(View.VISIBLE);
+        else
+            emptyLikes.setVisibility(View.GONE);
+
+        if (matchedUsers.isEmpty())
+            emptyMatches.setVisibility(View.VISIBLE);
+        else
+            emptyMatches.setVisibility(View.GONE);
+
     }
 }

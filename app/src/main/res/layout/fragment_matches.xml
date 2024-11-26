@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,6 +17,16 @@
             android:paddingBottom="10dp"
             android:textStyle="bold"
             android:text="Sent Invites" />
+
+        <TextView
+            android:id="@+id/emptyLikes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="none yet :("
+            android:textSize="18sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,6 +48,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Your Matches" />
+
+        <TextView
+            android:id="@+id/emptyMatches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="none yet :("
+            android:textSize="18sp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

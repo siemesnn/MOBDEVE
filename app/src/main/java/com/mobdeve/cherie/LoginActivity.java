@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText  passwordField, emailField;
     FirebaseAuth mAuth;
@@ -78,12 +78,12 @@ public class login extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
 
                             // Redirect to dashboard
-                            Intent i = new Intent(login.this, dashboard.class);
+                            Intent i = new Intent(LoginActivity.this, dashboard.class);
                             startActivity(i);
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(login.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
                         }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,8 +28,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp" />
 
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +39,16 @@
         <TextView
             android:id="@+id/profileName"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:text="Beatrice"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/profileNameEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter your name"
             android:inputType="textPersonName"
@@ -51,7 +57,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="18sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,14 +72,24 @@
             android:id="@+id/profileBio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="I am a frontend god,\nI will make your apps pretty!"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/profileBioEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
-            android:hint="I am a frontend god,\nI will make your apps pretty!"
+            android:hint="Enter your bio"
             android:inputType="textMultiLine"
             android:padding="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,6 +103,15 @@
             android:id="@+id/profileHobby"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter your hobby"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/profileHobbyEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter your hobby"
             android:inputType="text"
@@ -93,7 +119,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -107,6 +134,15 @@
             android:id="@+id/profileHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter your height"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/profileHeightEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter your height"
             android:inputType="number"
@@ -114,7 +150,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,14 +165,36 @@
             android:id="@+id/profileGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_rounded"
-            android:hint="Enter your gender"
-            android:inputType="text"
-            android:padding="16dp"
+            android:text="Enter your gender"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
+
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/genderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"/>
+
+            <RadioButton
+                android:id="@+id/genderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"/>
+
+            <RadioButton
+                android:id="@+id/genderOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other"/>
+        </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
@@ -149,14 +208,21 @@
             android:id="@+id/profileLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_rounded"
-            android:hint="Enter your location"
-            android:inputType="text"
-            android:padding="16dp"
+            android:text="Enter your location"
             android:textColor="@color/black"
-            android:textColorHint="@color/black"
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
+
+        <Spinner
+            android:id="@+id/profileLocationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_rounded"
+            android:padding="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <!-- Choices Section -->
         <TextView
@@ -182,11 +248,37 @@
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter your gender preference"
             android:inputType="text"
-            android:padding="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
             android:layout_marginBottom="16dp" />
+
+        <RadioGroup
+            android:id="@+id/genderPreferenceGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/preferenceMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/preferenceFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+
+            <RadioButton
+                android:id="@+id/preferenceOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Both" />
+        </RadioGroup>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -196,17 +288,40 @@
             android:textSize="16sp"
             android:layout_marginBottom="8dp" />
 
-        <!-- put block of text only visible when that dating intention is selected -->
         <TextView
             android:id="@+id/profileIntention"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="Intention"
-            android:padding="16dp"
-            android:layout_marginTop="8dp" />
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
 
+        <LinearLayout
+            android:id="@+id/intentionGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
+            <CheckBox
+                android:id="@+id/intentionCasualDating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Casual Dating" />
 
+            <CheckBox
+                android:id="@+id/intentionLongTerm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Long-term Relationships" />
+
+            <CheckBox
+                android:id="@+id/intentionMarriage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dating to Marry" />
+        </LinearLayout>
 
         <!-- Charms Section -->
         <TextView
@@ -229,6 +344,15 @@
             android:id="@+id/funFact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter a fun fact"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/funFactEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter a fun fact"
             android:inputType="text"
@@ -236,7 +360,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -250,6 +375,15 @@
             android:id="@+id/revealInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter reveal info"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/revealInfoEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter reveal info"
             android:inputType="text"
@@ -257,7 +391,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -271,6 +406,15 @@
             android:id="@+id/favoriteThings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter your favorite things"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/favoriteThingsEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/edit_text_rounded"
             android:hint="Enter your favorite things"
             android:inputType="text"
@@ -278,7 +422,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/editBtn"

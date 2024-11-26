@@ -90,7 +90,7 @@ public class VerifyAgeActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Intent intent = new Intent(VerifyAgeActivity.this, registered_info.class);
+                                Intent intent = new Intent(VerifyAgeActivity.this, RegisterInfoActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else {

@@ -42,7 +42,7 @@
             android:name=".dashboard"
             android:exported="false" />
         <activity
-            android:name=".registered_info"
+            android:name=".RegisterInfoActivity"
             android:exported="false" />
         <activity
             android:name=".VerifyAgeActivity"
@@ -57,7 +57,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

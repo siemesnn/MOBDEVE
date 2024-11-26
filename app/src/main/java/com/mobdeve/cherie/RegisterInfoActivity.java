@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,7 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class registered_info extends AppCompatActivity {
+public class RegisterInfoActivity extends AppCompatActivity {
 
 //    private ProgressBar progressBar;
 //    private FrameLayout contentFrame; // To hold different content for each step
@@ -107,7 +106,7 @@ public class registered_info extends AppCompatActivity {
                     .addOnSuccessListener(aVoid -> Log.d("SubmitInfo", "User data updated in Firestore."))
                     .addOnFailureListener(e -> Log.w("SubmitInfo", "Error updating user data", e));
 
-            Intent i = new Intent(registered_info.this, dashboard.class);
+            Intent i = new Intent(RegisterInfoActivity.this, dashboard.class);
             startActivity(i);
             finish();
         }
