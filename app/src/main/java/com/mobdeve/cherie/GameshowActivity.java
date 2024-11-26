@@ -1,5 +1,6 @@
 package com.mobdeve.cherie;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -45,7 +46,9 @@ public class GameshowActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Toast.makeText(getApplicationContext(), "You have selected " + seekBar.getProgress() + "%", Toast.LENGTH_SHORT).show();
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("percentage", seekBar.getProgress());
+                setResult(RESULT_OK, resultIntent);
                 finish();
             }
         });

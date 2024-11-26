@@ -3,15 +3,18 @@ package com.mobdeve.cherie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultCaller;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
@@ -28,6 +31,9 @@ public class InspectProfileActivity extends AppCompatActivity {
     private TextView revealInfo;
     private TextView favoriteThings;
     private TextView profileIntention;
+
+    private TextView compatibilityRating;
+    private Button gameButton;
 
     String otherUserId;
     UserData otherUser;
@@ -64,6 +70,8 @@ public class InspectProfileActivity extends AppCompatActivity {
         favoriteThings = findViewById(R.id.favoriteThings);
         profileIntention = findViewById(R.id.profileIntention);
 
+        compatibilityRating = findViewById(R.id.compatibilityRating);
+        gameButton = findViewById(R.id.gameButton);
 
         //Get intent Data
         this.otherUserId = getIntent().getStringExtra("id");
@@ -96,6 +104,8 @@ public class InspectProfileActivity extends AppCompatActivity {
                     profileIntention.setText("No intention specified");
                 // Check message count
                 checkMessageCount();
+
+                checkCompatibility();
             }
         });
 
@@ -166,8 +176,102 @@ public class InspectProfileActivity extends AppCompatActivity {
 
     public void startGame(View view){
         Intent i = new Intent(InspectProfileActivity.this, GameshowActivity.class);
-        startActivity(i);
+        startActivityForResult(i, 1);
     }
+
+    private void checkCompatibility(){
+        dbRef.collection("chatrooms")
+                .whereIn("userId1", Arrays.asList(currentUserId, otherUserId))
+                .whereIn("userId2", Arrays.asList(currentUserId, otherUserId))
+                .limit(1)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        String chatroomId = task.getResult().getDocuments().get(0).getId();
+                        dbRef.collection("chatrooms").document(chatroomId)
+                                .collection("gameshow").get().addOnCompleteListener(gameTask -> {
+                                    if (gameTask.isSuccessful()) {
+                                        boolean currentUserPlayed = false;
+                                        boolean otherUserPlayed = false;
+                                        int user1Percentage = 0;
+                                        int user2Percentage = 0;
+
+                                        // single out the results if both users have played the game
+                                        for (DocumentSnapshot document : gameTask.getResult().getDocuments()) {
+                                            String userId = document.getString("userId");
+                                            int percentage = document.getLong("percentage").intValue();
+                                            if (userId.equals(currentUserId)) {
+                                                currentUserPlayed = true;
+                                                user1Percentage = percentage;
+                                            } else if (userId.equals(otherUserId)) {
+                                                otherUserPlayed = true;
+                                                user2Percentage = percentage;
+                                            }
+                                        }
+
+                                        // if both users have played the game, calculate compatibility
+                                        if (currentUserPlayed && otherUserPlayed) {
+                                            int compatibility = Math.abs(user1Percentage - user2Percentage);
+                                            compatibility = 100 - compatibility;
+                                            compatibilityRating.setText("Compatibility Rating: " + compatibility + "%");
+                                            compatibilityRating.setVisibility(View.VISIBLE);
+                                            gameButton.setVisibility(View.GONE);
+                                        }
+                                        // if only current played the game
+                                        else if (currentUserPlayed) {
+                                            compatibilityRating.setText("Compatibility Rating: Waiting for other user");
+                                            compatibilityRating.setVisibility(View.VISIBLE);
+                                            gameButton.setVisibility(View.GONE);
+                                        }
+                                        //if only other or neither played the game
+                                        else {
+                                            compatibilityRating.setVisibility(View.GONE);
+                                            gameButton.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            int percentage = data.getIntExtra("percentage", 0);
+
+            // send data to firestore users' chatroom id on gameshow collection
+
+            // if other user has not played the game, show message
+            // "Compatibility Rating: Waiting for other user"
+
+            // if other user has also played the game, calculate compatibility, display on both
+            dbRef.collection("chatrooms")
+                    .whereIn("userId1", Arrays.asList(currentUserId, otherUserId))
+                    .whereIn("userId2", Arrays.asList(currentUserId, otherUserId))
+                    .limit(1)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                            String chatroomId = task.getResult().getDocuments().get(0).getId();
+                            dbRef.collection("chatrooms").document(chatroomId)
+                                    .collection("gameshow")
+                                    .document(currentUserId)
+                                    .set(new GameResultData(currentUserId, percentage))
+                                    .addOnCompleteListener(gameTask -> {
+                                        if (gameTask.isSuccessful()) {
+                                            // Check compatibility after updating the result
+                                            checkCompatibility();
+                                        }
+                                    });
+                        }
+                    });
+
+            compatibilityRating.setVisibility(View.VISIBLE);
+            gameButton.setVisibility(View.GONE);
+        }
+    }
+
 
 
 }
