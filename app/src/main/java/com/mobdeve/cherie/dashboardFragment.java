@@ -225,28 +225,42 @@ public class dashboardFragment extends Fragment {
 
     private void fetchProfiles() {
         dbRef.collection("users")
-                .whereGreaterThanOrEqualTo("age", minAge)
-                .whereLessThanOrEqualTo("age", maxAge)
+                .document(currentUserId)
+                .collection("likedUsers")
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    listProfiles.clear();
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        UserData profile = documentSnapshot.toObject(UserData.class);
-                        if (profile != null) {
-                            String profileLocation = profile.getLocation();
-                            if (location.isEmpty() || (profileLocation != null && profileLocation.equals(location))) {
-                                listProfiles.add(profile);
-                            }
-                        }
+                .addOnSuccessListener(likedUsersSnapshot -> {
+                    List<String> likedUserIds = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : likedUsersSnapshot) {
+                        likedUserIds.add(document.getId());
                     }
-                    adapter.notifyDataSetChanged();
-                    // Log the number of profiles retrieved and filtered
-                    Log.d("fetchProfiles", "Number of profiles retrieved: " + queryDocumentSnapshots.size());
-                    Log.d("fetchProfiles", "Number of profiles after filtering: " + listProfiles.size());
+                    // Add the current user's ID to the list to filter out self
+                    likedUserIds.add(currentUserId);
+
+                    // Fetch all profiles excluding liked profiles and self
+                    dbRef.collection("users")
+                            .whereGreaterThanOrEqualTo("age", minAge)
+                            .whereLessThanOrEqualTo("age", maxAge)
+                            .get()
+                            .addOnSuccessListener(queryDocumentSnapshots -> {
+                                listProfiles.clear();
+                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    UserData profile = documentSnapshot.toObject(UserData.class);
+                                    if (profile != null) {
+                                        String profileLocation = profile.getLocation();
+                                        if ((location.isEmpty() || (profileLocation != null && profileLocation.equals(location))) &&
+                                                !likedUserIds.contains(profile.getUserId())) {
+                                            listProfiles.add(profile);
+                                        }
+                                    }
+                                }
+                                adapter.notifyDataSetChanged();
+                                checkProfiles();
+                            })
+                            .addOnFailureListener(e -> {
+                                e.printStackTrace();
+                                Log.e("fetchProfiles", "Error fetching profiles", e);
+                            });
                 })
-                .addOnFailureListener(e -> {
-                    e.printStackTrace();
-                    Log.e("fetchProfiles", "Error fetching profiles", e);
-                });
+                .addOnFailureListener(e -> e.printStackTrace());
     }
 }
