@@ -48,7 +48,7 @@ public class chatFragment extends Fragment {
         fetchMatches();
 
 
-        matchAdapter = new MatchAdapter(listMatches);
+        matchAdapter = new MatchAdapter(getContext(), listMatches);
         recyclerViewMatch.setAdapter(matchAdapter);
 
         chatAdapter = new ChatAdapter(getContext(), listMatches);

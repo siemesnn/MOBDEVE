@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,9 +20,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class profileFragment extends Fragment {
-    private EditText profileName;
-    private EditText profileBio;
+    private TextView profileName;
+    private TextView profileBio;
     private TextView profileHobby;
+    private TextView profileHeight;
+    private TextView profileGender;
+    private TextView profileLocation;
+    private TextView genderPreference;
+    private TextView funFact;
+    private TextView revealInfo;
+    private TextView favoriteThings;
+    private TextView profileIntention;
     private Button editBtn;
     private Button saveBtn;
     private Button logoutBtn;
@@ -34,9 +43,18 @@ public class profileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        // Initialize too many views
         profileName = view.findViewById(R.id.profileName);
         profileBio = view.findViewById(R.id.profileBio);
         profileHobby = view.findViewById(R.id.profileHobby);
+        profileHeight = view.findViewById(R.id.profileHeight);
+        profileGender = view.findViewById(R.id.profileGender);
+        profileLocation = view.findViewById(R.id.profileLocation);
+        genderPreference = view.findViewById(R.id.genderPreference);
+        funFact = view.findViewById(R.id.funFact);
+        revealInfo = view.findViewById(R.id.revealInfo);
+        favoriteThings = view.findViewById(R.id.favoriteThings);
+        profileIntention = view.findViewById(R.id.profileIntention);
         editBtn = view.findViewById(R.id.editBtn);
         saveBtn = view.findViewById(R.id.saveBtn);
         logoutBtn = view.findViewById(R.id.logoutBtn);
@@ -44,6 +62,8 @@ public class profileFragment extends Fragment {
         dbRef = FirebaseFirestore.getInstance();
         currentUser = FirebaseAuth.getInstance();
 
+
+        //display data from Firestore
         dbRef.collection("users").document(currentUser.getUid()).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
@@ -52,6 +72,24 @@ public class profileFragment extends Fragment {
                             profileName.setText(user.getName());
                             profileBio.setText(user.getBio());
                             profileHobby.setText(user.getHobby());
+                            profileHeight.setText(String.valueOf(user.getHeight()));
+                            profileGender.setText(user.getGender());
+                            profileLocation.setText(user.getLocation());
+                            genderPreference.setText(user.getGenderPreference());
+                            funFact.setText(user.getFunFact());
+                            revealInfo.setText(user.getRevealInfo());
+                            favoriteThings.setText(user.getFavoriteThings());
+
+                            //Show Dating Intention
+                            String intention = "";
+                            if(user.isIntentionCasualDating())
+                                intention += "Casual Dating, ";
+                            if(user.isIntentionLongTerm())
+                                intention += "Long Term, ";
+                            if(user.isIntentionMarriage())
+                                intention += "Marriage, ";
+
+                            profileIntention.setText(intention.substring(0, intention.length() - 2));
                         }
                     }
                 })
@@ -71,16 +109,30 @@ public class profileFragment extends Fragment {
     }
 
     private void editProfile() {
-        profileName.setFocusableInTouchMode(true);
-        profileBio.setFocusableInTouchMode(true);
+        // make textfields invisible
+
+        // make edit textfields visible
+
+
+
+        //Set button visiblity
         editBtn.setVisibility(View.GONE);
         saveBtn.setVisibility(View.VISIBLE);
     }
 
     private void saveProfile() {
-        profileName.setFocusableInTouchMode(false);
-        profileBio.setFocusableInTouchMode(false);
+        // make changes to Firestore
+
+        // make textfields visible
+
+        // make edit textfields invisible
+
+        //Set button visiblity
         editBtn.setVisibility(View.VISIBLE);
         saveBtn.setVisibility(View.GONE);
+    }
+
+    private void initializeData(){
+
     }
 }

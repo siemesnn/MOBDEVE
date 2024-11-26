@@ -25,11 +25,12 @@ import java.util.Map;
 
 public class ChatroomActivity extends AppCompatActivity {
     // Views needed
-    private int CHAT_BAR_MAX = 75;
+    private int CHAT_BAR_MAX = 50;
     private TextView otherUserTv;
     private EditText messageEtv;
     private Button sendBtn;
     private ProgressBar progressBar;
+    private TextView revealInfoTextView;
 
     // RecyclerView Components
     private RecyclerView recyclerView;
@@ -51,6 +52,7 @@ public class ChatroomActivity extends AppCompatActivity {
         this.messageEtv = findViewById(R.id.messageEtv);
         this.sendBtn = findViewById(R.id.sendBtn);
         this.recyclerView = findViewById(R.id.chatRecyclerView);
+        this.revealInfoTextView = findViewById(R.id.revealInfoTextView);
         this.progressBar = findViewById(R.id.progressBar);
         this.progressBar.setMax(CHAT_BAR_MAX);
 
@@ -157,6 +159,7 @@ public class ChatroomActivity extends AppCompatActivity {
             this.myFirestoreRecyclerAdapter.stopListening();
         }
     }
+
     private void updateProgressBar() {
         dbRef.collection("chatrooms")
                 .document(chatroomId)
@@ -167,6 +170,10 @@ public class ChatroomActivity extends AppCompatActivity {
                         int messageCount = task.getResult().size();
                         int progress = messageCount;
                         progressBar.setProgress(progress);
+
+                        if (progress >= CHAT_BAR_MAX) {
+                            revealInfoTextView.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
     }

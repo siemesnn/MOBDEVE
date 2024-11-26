@@ -79,6 +79,11 @@ public class registered_info extends AppCompatActivity {
     public void submitInfo(View v){
         UserData userData = registerInfoViewModel.getUserData();
 
+        // For reference
+        //Character: bio, hobby, height, gender, location
+        //Choice: genderPreference, intentionCasualDating, intentionLongTerm, intentionMarriage
+        //Charm: funFact, revealInfo, favoriteThings
+
         // Send all that data to Firestore
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {

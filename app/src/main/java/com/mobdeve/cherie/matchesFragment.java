@@ -22,7 +22,7 @@ import java.util.Set;
 public class matchesFragment extends Fragment {
     private RecyclerView recyclerViewLike;
     private RecyclerView recyclerViewMatch;
-    private MatchAdapter likeAdapter;
+    private SentInvitesAdapter likeAdapter;
     private MatchScrollAdapter matchAdapter;
 
     private FirebaseFirestore dbRef;
@@ -52,7 +52,7 @@ public class matchesFragment extends Fragment {
 
         fetchMatches();
 
-        likeAdapter = new MatchAdapter(likedUsers);
+        likeAdapter = new SentInvitesAdapter(likedUsers);
         recyclerViewLike.setAdapter(likeAdapter);
 
         matchAdapter = new MatchScrollAdapter(matchedUsers);

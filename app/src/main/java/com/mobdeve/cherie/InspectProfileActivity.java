@@ -14,9 +14,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class InspectProfileActivity extends AppCompatActivity {
-    TextView NameView;
-    TextView BioView;
-    TextView HobbyView;
+    private TextView profileName;
+    private TextView profileBio;
+    private TextView profileHobby;
+    private TextView profileHeight;
+    private TextView profileGender;
+    private TextView profileLocation;
+    private TextView genderPreference;
+    private TextView funFact;
+    private TextView revealInfo;
+    private TextView favoriteThings;
+    private TextView profileIntention;
 
     String otherUserId;
     UserData otherUser;
@@ -39,9 +47,19 @@ public class InspectProfileActivity extends AppCompatActivity {
         dbRef = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        NameView = findViewById(R.id.profileName);
-        BioView = findViewById(R.id.profileBio);
-        HobbyView = findViewById(R.id.profileHobby);
+        // Initialize too many views
+        profileName = findViewById(R.id.profileName);
+        profileBio = findViewById(R.id.profileBio);
+        profileHobby = findViewById(R.id.profileHobby);
+        profileHeight = findViewById(R.id.profileHeight);
+        profileGender = findViewById(R.id.profileGender);
+        profileLocation = findViewById(R.id.profileLocation);
+        genderPreference = findViewById(R.id.genderPreference);
+        funFact = findViewById(R.id.funFact);
+        revealInfo = findViewById(R.id.revealInfo);
+        favoriteThings = findViewById(R.id.favoriteThings);
+        profileIntention = findViewById(R.id.profileIntention);
+
 
         //Get intent Data
         this.otherUserId = getIntent().getStringExtra("id");
@@ -50,9 +68,31 @@ public class InspectProfileActivity extends AppCompatActivity {
         dbRef.collection("users").document(otherUserId).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 otherUser = task.getResult().toObject(UserData.class);
-                NameView.setText(otherUser.getName());
-                BioView.setText(otherUser.getBio());
-                HobbyView.setText(otherUser.getHobby());
+
+                profileName.setText(otherUser.getName());
+                profileBio.setText(otherUser.getBio());
+                profileHobby.setText(otherUser.getHobby());
+                profileHeight.setText(String.valueOf(otherUser.getHeight()));
+                profileGender.setText(otherUser.getGender());
+                profileLocation.setText(otherUser.getLocation());
+                genderPreference.setText(otherUser.getGenderPreference());
+                funFact.setText(otherUser.getFunFact());
+                revealInfo.setText(otherUser.getRevealInfo());
+                favoriteThings.setText(otherUser.getFavoriteThings());
+
+                //Show Dating Intention
+                String intention = "";
+                if(otherUser.isIntentionCasualDating())
+                    intention += "Casual Dating, ";
+                if(otherUser.isIntentionLongTerm())
+                    intention += "Long Term, ";
+                if(otherUser.isIntentionMarriage())
+                    intention += "Marriage, ";
+
+                if(intention.length() > 0)
+                    profileIntention.setText(intention.substring(0, intention.length() - 2));
+                else
+                    profileIntention.setText("No intention specified");
             }
         });
 
