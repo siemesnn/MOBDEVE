@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mobdeve.cherie.UserData;
+
 import java.util.List;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
@@ -34,6 +36,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         holder.nameAge.setText(nameAge);
         holder.bio.setText(profile.getBio());
         holder.hobby.setText(profile.getHobby());
+        holder.preferencesLocation.setText("dating in " + profile.getLocation());
     }
 
     @Override
@@ -45,12 +48,14 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
         TextView nameAge;
         TextView bio;
         TextView hobby;
+        TextView preferencesLocation;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameAge = itemView.findViewById(R.id.name_age);
             bio = itemView.findViewById(R.id.bio);
             hobby = itemView.findViewById(R.id.hobbies);
+            preferencesLocation = itemView.findViewById(R.id.preferences_location);
         }
     }
 }
