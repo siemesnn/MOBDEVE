@@ -49,7 +49,7 @@ public class dashboardFragment extends Fragment {
     private ProfileAdapter adapter;
     private FirebaseFirestore dbRef;
     private Button filterButton;
-    private int minAge = 0, maxAge = 100;
+    private int minAge = 18, maxAge = 100;
     private String location = "";
     private int currentProfileIndex = 0;
     private String currentUserId;
