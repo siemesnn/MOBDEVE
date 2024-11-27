@@ -99,6 +99,7 @@ public class RegisterInfoActivity extends AppCompatActivity {
         if (user != null) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             Map<String, Object> userUpdates = new HashMap<>();
+            userUpdates.put("imageUrl", userData.getImageUrl());
             userUpdates.put("bio", userData.getBio());
             userUpdates.put("hobby", userData.getHobby());
             userUpdates.put("height", userData.getHeight());
