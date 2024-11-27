@@ -25,6 +25,7 @@ public class CharacterFragment extends Fragment {
     private EditText hobbyEditText;
     private EditText heightEditText;
     private RadioGroup genderGroup;
+    private EditText profilePicUrlEditText;
 
     private RegisterInfoViewModel registerInfoViewModel;
 
@@ -38,6 +39,7 @@ public class CharacterFragment extends Fragment {
         hobbyEditText = view.findViewById(R.id.hobbyInput);
         heightEditText = view.findViewById(R.id.heightInput);
         genderGroup = view.findViewById(R.id.genderGroup);
+        profilePicUrlEditText = view.findViewById(R.id.profilePicUrlInput);
 
         // List of cities in Manila
         String[] citiesInManila = {"Manila", "Quezon City", "Caloocan", "Makati", "Pasig", "Taguig", "Mandaluyong", "Marikina", "Parañaque", "Las Piñas"};
@@ -47,6 +49,19 @@ public class CharacterFragment extends Fragment {
         locationSpinner.setAdapter(adapter);
 
         registerInfoViewModel = new ViewModelProvider(requireActivity()).get(RegisterInfoViewModel.class);
+
+        profilePicUrlEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                registerInfoViewModel.getUserData().setImageUrl(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         // Set up listeners to save data in real-time
         bioEditText.addTextChangedListener(new TextWatcher() {

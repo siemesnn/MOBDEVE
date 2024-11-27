@@ -17,6 +17,7 @@ public class UserData {
     private String funFact;
     private String revealInfo;
     private String favoriteThings;
+    private String imageUrl;
 
     public UserData(){
         // Empty constructor needed for Firestore
@@ -146,4 +147,13 @@ public class UserData {
     public String getUserId(){
         return this.userId;
     }
+
+    public void setImageUrl(String imageUrl){
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl(){
+        return this.imageUrl;
+    }
+
 }

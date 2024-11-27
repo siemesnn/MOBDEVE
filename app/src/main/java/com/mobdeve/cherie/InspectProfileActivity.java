@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Arrays;
 
 public class InspectProfileActivity extends AppCompatActivity {
+    private ImageView profileImage;
     private TextView profileName;
     private TextView profileBio;
     private TextView profileHobby;
@@ -58,6 +62,7 @@ public class InspectProfileActivity extends AppCompatActivity {
         currentUserId = mAuth.getUid();
 
         // Initialize too many views
+        profileImage = findViewById(R.id.profilePic);
         profileName = findViewById(R.id.profileName);
         profileBio = findViewById(R.id.profileBio);
         profileHobby = findViewById(R.id.profileHobby);
@@ -81,6 +86,10 @@ public class InspectProfileActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 otherUser = task.getResult().toObject(UserData.class);
 
+                Glide.with(this)
+                        .load(otherUser.getImageUrl())
+                        .transform(new CircleCrop())
+                        .into(profileImage);
                 profileName.setText(otherUser.getName());
                 profileBio.setText(otherUser.getBio());
                 profileHobby.setText(otherUser.getHobby());

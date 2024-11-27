@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -82,6 +83,16 @@ public class RegisterInfoActivity extends AppCompatActivity {
         //Character: bio, hobby, height, gender, location
         //Choice: genderPreference, intentionCasualDating, intentionLongTerm, intentionMarriage
         //Charm: funFact, revealInfo, favoriteThings
+
+        // Error checking, of all fields not filled out do not submit to firebase or mvoe to next screen
+        if (userData.getImageUrl().isEmpty() || userData.getBio().isEmpty() || userData.getHobby().isEmpty() || userData.getHeight() == 0.0 ||
+                userData.getGender().isEmpty() || userData.getLocation().isEmpty() || userData.getGenderPreference().isEmpty() ||
+                userData.getFunFact().isEmpty() || userData.getRevealInfo().isEmpty() || userData.getFavoriteThings().isEmpty()) {
+
+            // Display an error message to the user (you can customize this as needed)
+            Toast.makeText(this, "Please fill out all fields before submitting.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Send all that data to Firestore
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

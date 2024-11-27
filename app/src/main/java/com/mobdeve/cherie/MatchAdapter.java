@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -40,6 +42,11 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
         UserData match = matches.get(position);
         holder.name.setText(match.getName());
         // Load images?
+        Glide.with(this.context)
+                .load(match.getImageUrl())
+                .transform(new CircleCrop())
+                .into(holder.profileImage);
+
         dbRef = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 

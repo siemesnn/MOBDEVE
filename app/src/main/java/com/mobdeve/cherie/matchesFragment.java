@@ -61,7 +61,7 @@ public class matchesFragment extends Fragment {
         likeAdapter = new SentInvitesAdapter(likedUsers);
         recyclerViewLike.setAdapter(likeAdapter);
 
-        matchAdapter = new MatchScrollAdapter(matchedUsers);
+        matchAdapter = new MatchScrollAdapter(getContext(), matchedUsers);
         recyclerViewMatch.setAdapter(matchAdapter);
 
         return view;

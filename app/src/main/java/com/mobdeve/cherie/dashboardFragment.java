@@ -207,7 +207,6 @@ public class dashboardFragment extends Fragment {
                                                         })
                                                         .addOnFailureListener(e -> e.printStackTrace());
                                             } else {
-                                                Toast.makeText(getContext(), "Liked " + likedUser.getName(), Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                         .addOnFailureListener(e -> e.printStackTrace());

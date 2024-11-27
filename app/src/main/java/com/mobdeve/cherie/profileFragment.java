@@ -2,6 +2,7 @@ package com.mobdeve.cherie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import com.bumptech.glide.Glide;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,6 +31,7 @@ import java.util.Map;
 
 public class profileFragment extends Fragment {
     // Text views
+    private ImageView profilePic;
     private TextView profileName;
     private TextView profileBio;
     private TextView profileHobby;
@@ -41,6 +45,7 @@ public class profileFragment extends Fragment {
     private TextView profileIntention;
 
     //Editing fields
+    private EditText editProfilePic;
     private EditText editName;
     private EditText editBio;
     private EditText editHobby;
@@ -65,12 +70,15 @@ public class profileFragment extends Fragment {
     private FirebaseFirestore dbRef;
     private FirebaseAuth currentUser;
 
+    private String tempImageUrl;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         // Initialize too many views
+        profilePic = view.findViewById(R.id.profilePic);
         profileName = view.findViewById(R.id.profileName);
         profileBio = view.findViewById(R.id.profileBio);
         profileHobby = view.findViewById(R.id.profileHobby);
@@ -84,6 +92,7 @@ public class profileFragment extends Fragment {
         profileIntention = view.findViewById(R.id.profileIntention);
 
         // initialize edit views T-T
+        editProfilePic = view.findViewById(R.id.profilePicUrlInput);
         editName = view.findViewById(R.id.profileNameEdit);
         editBio = view.findViewById(R.id.profileBioEdit);
         editHobby = view.findViewById(R.id.profileHobbyEdit);
@@ -121,6 +130,12 @@ public class profileFragment extends Fragment {
                     if (documentSnapshot.exists()) {
                         UserData user = documentSnapshot.toObject(UserData.class);
                         if (user != null) {
+                            //set profile pic with an image url
+                            Glide.with(this)
+                                    .load(user.getImageUrl())
+                                    .transform(new CircleCrop())
+                                    .into(profilePic);
+                            tempImageUrl = user.getImageUrl();
                             profileName.setText(user.getName());
                             profileBio.setText(user.getBio());
                             profileHobby.setText(user.getHobby());
@@ -166,6 +181,7 @@ public class profileFragment extends Fragment {
     private void editProfile() {
         // pass value
         // Populate EditTexts with current data
+        editProfilePic.setText(tempImageUrl);
         editName.setText(profileName.getText().toString());
         editBio.setText(profileBio.getText().toString());
         editHobby.setText(profileHobby.getText().toString());
@@ -207,6 +223,7 @@ public class profileFragment extends Fragment {
 
 
         // make textfields invisible
+        profilePic.setVisibility(View.GONE);
         profileName.setVisibility(View.GONE);
         profileBio.setVisibility(View.GONE);
         profileHobby.setVisibility(View.GONE);
@@ -220,6 +237,7 @@ public class profileFragment extends Fragment {
         profileIntention.setVisibility(View.GONE);
 
         // make input fields visible
+        editProfilePic.setVisibility(View.VISIBLE);
         editName.setVisibility(View.VISIBLE);
         editBio.setVisibility(View.VISIBLE);
         editHobby.setVisibility(View.VISIBLE);
@@ -233,9 +251,6 @@ public class profileFragment extends Fragment {
         intentionGroup.setVisibility(View.VISIBLE);
 
 
-        // make edit textfields visible
-
-
 
         //Set button visiblity
         editBtn.setVisibility(View.GONE);
@@ -244,6 +259,10 @@ public class profileFragment extends Fragment {
 
     private void saveProfile() {
         // pass values to textviews
+        Glide.with(this)
+                .load(editProfilePic.getText().toString())
+                .transform(new CircleCrop())
+                .into(profilePic);
         profileName.setText(editName.getText().toString());
         profileBio.setText(editBio.getText().toString());
         profileHobby.setText(editHobby.getText().toString());
@@ -287,6 +306,7 @@ public class profileFragment extends Fragment {
             profileIntention.setText("No intention specified");
 
         // make textfields visible
+        profilePic.setVisibility(View.VISIBLE);
         profileName.setVisibility(View.VISIBLE);
         profileBio.setVisibility(View.VISIBLE);
         profileHobby.setVisibility(View.VISIBLE);
@@ -300,6 +320,7 @@ public class profileFragment extends Fragment {
         profileIntention.setVisibility(View.VISIBLE);
 
         // make input fields invisible
+        editProfilePic.setVisibility(View.GONE);
         editName.setVisibility(View.GONE);
         editBio.setVisibility(View.GONE);
         editHobby.setVisibility(View.GONE);
@@ -322,6 +343,7 @@ public class profileFragment extends Fragment {
     private void updateFirebase() {
         // Create a map to store the updated values
         Map<String, Object> updatedValues = new HashMap<>();
+        updatedValues.put("imageUrl", editProfilePic.getText().toString());
         updatedValues.put("name", editName.getText().toString());
         updatedValues.put("bio", editBio.getText().toString());
         updatedValues.put("hobby", editHobby.getText().toString());
