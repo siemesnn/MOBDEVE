@@ -56,6 +56,7 @@ public class FilterActivity extends AppCompatActivity {
         dbRef.collection("users").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 ArrayList<String> locations = new ArrayList<>();
+                locations.add("None");
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     String location = document.getString("location");
                     if (location != null && !locations.contains(location)) {

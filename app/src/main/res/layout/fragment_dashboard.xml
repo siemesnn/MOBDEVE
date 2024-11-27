@@ -68,14 +68,15 @@
         android:id="@+id/filterButton"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/black"
         android:fontFamily="@font/bold"
         android:text="Filter"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,11 +2,21 @@ package com.mobdeve.cherie;
 
 import static android.app.Activity.RESULT_OK;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +48,7 @@ public class dashboardFragment extends Fragment {
     private FirebaseFirestore dbRef;
     private Button filterButton;
     private int minAge = 0, maxAge = 100;
-    private String location = "Manila";
+    private String location = "";
     private int currentProfileIndex = 0;
     private String currentUserId;
 
@@ -83,6 +93,11 @@ public class dashboardFragment extends Fragment {
             minAge = data.getIntExtra("minAge", 0);
             maxAge = data.getIntExtra("maxAge", 100);
             location = data.getStringExtra("location");
+
+            if(location.equals("None")){
+                location = "";
+            }
+
             fetchProfiles();
         }
     }
@@ -103,15 +118,19 @@ public class dashboardFragment extends Fragment {
         if (listProfiles.isEmpty()) {
             noMoreTextView.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
+            getView().findViewById(R.id.yesButton).setVisibility(View.GONE);
+            getView().findViewById(R.id.noButton).setVisibility(View.GONE);
         } else {
             noMoreTextView.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.yesButton).setVisibility(View.VISIBLE);
+            getView().findViewById(R.id.noButton).setVisibility(View.VISIBLE);
         }
     }
 
     private void showNextItem(){
         // this function will show the next item in the recycler view
-        if (!listProfiles.isEmpty()){
+        if (currentProfileIndex < listProfiles.size() - 1){
             currentProfileIndex++;
             recyclerView.smoothScrollToPosition(currentProfileIndex);
         } else {
@@ -180,6 +199,7 @@ public class dashboardFragment extends Fragment {
                                                                     .addOnSuccessListener(aVoid2 -> {
                                                                         createChatroom(currentUserId, likedUser.getUserId());
                                                                         Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
+                                                                        sendMatchNotification("It's a match with " + likedUser.getName());
                                                                     })
                                                                     .addOnFailureListener(e -> e.printStackTrace());
                                                         })
@@ -194,6 +214,33 @@ public class dashboardFragment extends Fragment {
                 }
             }).addOnFailureListener(e -> e.printStackTrace());
         }
+    }
+
+    private void sendMatchNotification(String matchDetails) {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0 /* Request code */, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        String channelId = "match_channel_id";
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder =
+                new NotificationCompat.Builder(getContext(), channelId)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle("New Match Found!")
+                        .setContentText(matchDetails)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(channelId, "Match Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
     private void createChatroom(String userId1, String userId2) {
@@ -211,17 +258,6 @@ public class dashboardFragment extends Fragment {
                 });
     }
 
-    public void checkProfileListOnStart(){
-        if (listProfiles.size() == 0){
-            noMoreTextView.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-            getView().findViewById(R.id.yesButton).setVisibility(View.GONE);
-            getView().findViewById(R.id.noButton).setVisibility(View.GONE);
-        } else {
-            noMoreTextView.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
-    }
 
     private void fetchProfiles() {
         dbRef.collection("users")
@@ -253,8 +289,10 @@ public class dashboardFragment extends Fragment {
                                         }
                                     }
                                 }
-                                adapter.notifyDataSetChanged();
+                                currentProfileIndex = 0;
+                                recyclerView.smoothScrollToPosition(currentProfileIndex);
                                 checkProfiles();
+                                adapter.notifyDataSetChanged();
                             })
                             .addOnFailureListener(e -> {
                                 e.printStackTrace();
