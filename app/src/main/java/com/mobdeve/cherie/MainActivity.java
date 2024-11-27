@@ -16,12 +16,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser user;
     FirebaseMessaging fcm;
+    FirebaseFirestore dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,23 @@ public class MainActivity extends AppCompatActivity {
                         // Get new FCM registration token
                         String token = task.getResult();
 
+
+
                         // Log and toast
                         System.out.println("FCM token: " + token);
                         Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                        // Save the token to Firestore
+                        if (user != null) {
+
+                            dbRef = FirebaseFirestore.getInstance();
+                            dbRef.collection("users").document(user.getUid())
+                                    .update("fcmToken", token)
+                                    .addOnSuccessListener(aVoid -> System.out.println("FCM token saved to Firestore"))
+                                    .addOnFailureListener(e -> System.out.println("Error saving FCM token to Firestore"));
+
+                            Intent serviceIntent = new Intent(getApplicationContext(), FirestoreListenerService.class);
+                            startService(serviceIntent);
+                        }
                     }
                 });
 
