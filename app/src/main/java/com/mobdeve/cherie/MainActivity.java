@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
                                     .update("fcmToken", token)
                                     .addOnSuccessListener(aVoid -> System.out.println("FCM token saved to Firestore"))
                                     .addOnFailureListener(e -> System.out.println("Error saving FCM token to Firestore"));
-
-                            Intent serviceIntent = new Intent(getApplicationContext(), FirestoreListenerService.class);
-                            startService(serviceIntent);
                         }
                     }
                 });

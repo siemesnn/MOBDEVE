@@ -202,7 +202,6 @@ public class dashboardFragment extends Fragment {
                                                                         createChatroom(currentUserId, likedUser.getUserId());
                                                                         Toast.makeText(getContext(), "It's a match with " + likedUser.getName(), Toast.LENGTH_SHORT).show();
                                                                         sendMatchNotification("It's a match with " + likedUser.getName());
-                                                                        sendNotificationToUser(likedUser.getUserId(), "It's a match with " + currentUserName);
                                                                     })
                                                                     .addOnFailureListener(e -> e.printStackTrace());
                                                         })
@@ -244,23 +243,6 @@ public class dashboardFragment extends Fragment {
         }
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
-    }
-
-    private void sendNotificationToUser(String userId, String message) {
-        dbRef.collection("users").document(userId).get().addOnSuccessListener(documentSnapshot -> {
-            if (documentSnapshot.exists()) {
-                String token = documentSnapshot.getString("fcmToken");
-                if (token != null) {
-                    // Send notification using FCM
-                    FirebaseMessaging fm = FirebaseMessaging.getInstance();
-                    RemoteMessage remoteMessage = new RemoteMessage.Builder(token)
-                            .setMessageId(Integer.toString(message.hashCode()))
-                            .addData("message", message)
-                            .build();
-                    fm.send(remoteMessage);
-                }
-            }
-        }).addOnFailureListener(e -> e.printStackTrace());
     }
 
     private void createChatroom(String userId1, String userId2) {
